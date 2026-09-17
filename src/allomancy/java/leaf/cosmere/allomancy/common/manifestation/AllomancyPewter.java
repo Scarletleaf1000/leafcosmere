@@ -87,7 +87,7 @@ public class AllomancyPewter extends AllomancyManifestation
 				float damageReductionMultiplier = 1 - AllomancyConfigs.SERVER.PEWTER_DAMAGE_REDUCTION_LEVEL.get().floatValue();
 
 
-				if (damage > livingEntity.getHealth() && pewter.isFlaring(data))
+				if (damage >= livingEntity.getHealth() && pewter.isFlaring(data))
 				{
 						//prevent death by flaring
 						damageReductionMultiplier = 0.1f;
@@ -97,7 +97,7 @@ public class AllomancyPewter extends AllomancyManifestation
 				final float newDamageAmount = damage * damageReductionMultiplier;
 				final float delayedDamage = damage - newDamageAmount;
 
-				event.setAmount(damage - newDamageAmount);
+				event.setAmount(newDamageAmount);
 				AllomancySpiritwebSubmodule asm = (AllomancySpiritwebSubmodule) data.getSubmodule(Manifestations.ManifestationTypes.ALLOMANCY);
 				asm.setPewterDelayedDamage(asm.getPewterDelayedDamage() + delayedDamage);
 			}

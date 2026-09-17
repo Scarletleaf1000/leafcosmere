@@ -53,16 +53,14 @@ public class PewterBurnEffect extends CosmereEffect
 	@Override
 	public Map<Attribute, AttributeModifierInfo> getAttributeModifiers()
 	{
-		if (!checkedConfig)
+		Attribute determination = AttributesRegistry.DETERMINATION.get();
+		if (!super.getAttributeModifiers().containsKey(determination))
 		{
-			checkedConfig = true;
 			if (AllomancyConfigs.SERVER.getConfigSpec().isLoaded()
 					&& AllomancyConfigs.SERVER.PEWTER_EXTRA_DAMAGE_REDUCTION.get())
 			{
-				//damage resistance
-				//0.125 * 9 = 1.125
 				addAttributeModifier(
-						AttributesRegistry.DETERMINATION.get(),//please forgive me for my sins anime god
+						determination,
 						0.125D,
 						AttributeModifier.Operation.ADDITION);
 			}
