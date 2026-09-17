@@ -5,6 +5,8 @@
 package leaf.cosmere.allomancy.common.manifestation;
 
 import leaf.cosmere.allomancy.common.capabilities.AllomancySpiritwebSubmodule;
+import leaf.cosmere.allomancy.common.config.AllomancyConfigs;
+import leaf.cosmere.allomancy.common.config.AllomancyServerConfig;
 import leaf.cosmere.allomancy.common.registries.AllomancyDamageTypesRegistry;
 import leaf.cosmere.allomancy.common.registries.AllomancyEffects;
 import leaf.cosmere.allomancy.common.registries.AllomancyManifestations;
@@ -82,15 +84,13 @@ public class AllomancyPewter extends AllomancyManifestation
 			if (pewter.isAllomanticBurn(data))
 			{
 				float damage = event.getAmount();
-				//todo pewter damage reduction config
-				//half by default?
-				float damageReductionMultiplier = 0.5f;
+				float damageReductionMultiplier = 1 - AllomancyConfigs.SERVER.PEWTER_DAMAGE_REDUCTION_LEVEL.get().floatValue();
 
 
 				if (damage > livingEntity.getHealth() && pewter.isFlaring(data))
 				{
-					//prevent death by flaring
-					damageReductionMultiplier = 0.1f;
+						//prevent death by flaring
+						damageReductionMultiplier = 0.1f;
 				}
 
 
