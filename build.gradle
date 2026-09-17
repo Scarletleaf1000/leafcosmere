@@ -60,7 +60,7 @@ idea {
 	}
 }
 
-def build_number = System.env.BUILD_NUMBER ?: 1
+def build_number = System.env.BUILD_NUMBER ?: 133
 def full_mod_version = mod_version + "." + build_number
 def release_type = System.env.TC_RELEASE_TYPE ?: "alpha"
 
