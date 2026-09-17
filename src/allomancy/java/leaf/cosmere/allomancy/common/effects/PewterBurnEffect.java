@@ -56,7 +56,8 @@ public class PewterBurnEffect extends CosmereEffect
 		if (!checkedConfig)
 		{
 			checkedConfig = true;
-			if (AllomancyConfigs.SERVER.PEWTER_EXTRA_DAMAGE_REDUCTION.get())
+			if (AllomancyConfigs.SERVER.getConfigSpec().isLoaded()
+					&& AllomancyConfigs.SERVER.PEWTER_EXTRA_DAMAGE_REDUCTION.get())
 			{
 				//damage resistance
 				//0.125 * 9 = 1.125
