@@ -2,5 +2,13 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "hemalurgy:item/gold_spike"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "hemalurgy:pierce": 1.0
+      },
+      "model": "hemalurgy:item/gold_spike_pierce"
+    }
+  ]
 }

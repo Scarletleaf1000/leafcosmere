@@ -2,5 +2,13 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "hemalurgy:item/bendalloy_spike"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "hemalurgy:pierce": 1.0
+      },
+      "model": "hemalurgy:item/bendalloy_spike_pierce"
+    }
+  ]
 }

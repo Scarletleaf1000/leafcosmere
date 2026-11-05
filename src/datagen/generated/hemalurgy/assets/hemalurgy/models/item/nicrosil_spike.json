@@ -2,5 +2,13 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "hemalurgy:item/nicrosil_spike"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "hemalurgy:pierce": 1.0
+      },
+      "model": "hemalurgy:item/nicrosil_spike_pierce"
+    }
+  ]
 }

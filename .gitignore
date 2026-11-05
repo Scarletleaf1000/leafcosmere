@@ -27,3 +27,5 @@ libs/
 
 **/.DS_Store
 /runGameTests/
+/src/datagen/
+/src/gameTest/

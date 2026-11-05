@@ -30,6 +30,7 @@ import java.util.*;
 public interface IHemalurgicInfo
 {
 	String stolen_identity_tag = "stolen_identity_tag";
+	String PIERCE_TAG = "pierce";
 	List<Metals.MetalType> whiteList = new ArrayList<Metals.MetalType>(4);
 
 	default boolean matchHemalurgicIdentity(ItemStack stack, UUID uniqueID)

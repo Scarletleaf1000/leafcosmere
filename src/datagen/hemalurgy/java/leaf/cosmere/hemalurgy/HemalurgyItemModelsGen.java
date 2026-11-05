@@ -7,6 +7,7 @@ package leaf.cosmere.hemalurgy;
 import leaf.cosmere.api.helpers.RegistryHelper;
 import leaf.cosmere.api.providers.IItemProvider;
 import leaf.cosmere.hemalurgy.common.Hemalurgy;
+import leaf.cosmere.hemalurgy.common.items.HemalurgicSpikeItem;
 import leaf.cosmere.hemalurgy.common.registries.HemalurgyItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -41,13 +42,22 @@ public class HemalurgyItemModelsGen extends ItemModelProvider
 				getBuilder(item.toString()).parent(new ModelFile.UncheckedModelFile("item/template_spawn_egg"));
 				continue;
 			}
-			//if (item instanceof HemalurgicSpikeItem)
-			//{
-			//	this.getBuilder(path)
-			//			.parent(new ModelFile.UncheckedModelFile("hemalurgy:item/spike"))
-			//			.texture("layer0", modLoc("item/" + "metal_spike"));
-			//	continue;
-			//}
+			else if (item instanceof HemalurgicSpikeItem)
+			{
+				//pierced spikes use the vertically flipped model
+				ModelFile pierceModel = this.getBuilder(path + "_pierce")
+						.parent(new ModelFile.UncheckedModelFile(modLoc("item/spike")))
+						.texture("layer0", modLoc("item/" + path));
+
+				this.getBuilder(path)
+						.parent(new ModelFile.UncheckedModelFile("item/generated"))
+						.texture("layer0", modLoc("item/" + path))
+						.override()
+						.predicate(Hemalurgy.rl(HemalurgicSpikeItem.PIERCE_TAG), 1)
+						.model(pierceModel)
+						.end();
+				continue;
+			}
 			else if (item instanceof SwordItem)
 			{
 				//koloss sword

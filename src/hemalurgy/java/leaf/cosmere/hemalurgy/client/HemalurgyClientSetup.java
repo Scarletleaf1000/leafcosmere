@@ -11,6 +11,10 @@ import leaf.cosmere.hemalurgy.client.render.model.KolossMediumModel;
 import leaf.cosmere.hemalurgy.client.render.model.KolossSmallModel;
 import leaf.cosmere.hemalurgy.client.render.model.SpikeModel;
 import leaf.cosmere.hemalurgy.common.Hemalurgy;
+import leaf.cosmere.common.registration.impl.ItemRegistryObject;
+import leaf.cosmere.hemalurgy.common.items.HemalurgicSpikeItem;
+import leaf.cosmere.hemalurgy.common.registries.HemalurgyItems;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,6 +37,17 @@ public class HemalurgyClientSetup
 	public static void init(final FMLClientSetupEvent event)
 	{
 		HemalurgyRenderers.register();
+
+		event.enqueueWork(() ->
+		{
+			for (ItemRegistryObject<HemalurgicSpikeItem> spike : HemalurgyItems.METAL_SPIKE.values())
+			{
+				ItemProperties.register(
+						spike.asItem(),
+						Hemalurgy.rl(HemalurgicSpikeItem.PIERCE_TAG),
+						(stack, level, entity, seed) -> HemalurgicSpikeItem.hasPierce(stack) ? 1 : 0);
+			}
+		});
 	}
 
 

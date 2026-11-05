@@ -10,6 +10,7 @@ import com.google.common.collect.Multimap;
 import leaf.cosmere.api.CosmereAPI;
 import leaf.cosmere.api.Manifestations;
 import leaf.cosmere.api.Metals;
+import leaf.cosmere.api.helpers.StackNBTHelper;
 import leaf.cosmere.api.manifestation.Manifestation;
 import leaf.cosmere.common.cap.entity.SpiritwebCapability;
 import leaf.cosmere.common.items.ChargeableMetalCurioItem;
@@ -18,6 +19,8 @@ import leaf.cosmere.hemalurgy.common.config.HemalurgyConfigs;
 import leaf.cosmere.hemalurgy.common.registries.HemalurgyAttributes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -78,6 +81,30 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 	{
 		boolean hasBindingCurse = EnchantmentHelper.hasBindingCurse(stack);
 		return (!hasBindingCurse || (context.entity() instanceof Player player && player.isCreative()));
+	}
+
+	public static boolean hasPierce(ItemStack stack)
+	{
+		return StackNBTHelper.getBoolean(stack, PIERCE_TAG, false);
+	}
+
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+	{
+		ItemStack stack = player.getItemInHand(hand);
+
+		//shift+right-click toggles whether the spike pierces.
+		if (player.isShiftKeyDown())
+		{
+			if (!level.isClientSide)
+			{
+				StackNBTHelper.setBoolean(stack, PIERCE_TAG, !hasPierce(stack));
+			}
+
+			return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+		}
+
+		return super.use(level, player, hand);
 	}
 
 
