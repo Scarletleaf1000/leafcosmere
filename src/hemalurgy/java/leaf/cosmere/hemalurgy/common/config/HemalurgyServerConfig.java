@@ -22,6 +22,8 @@ public class HemalurgyServerConfig implements ICosmereConfig
     public final ForgeConfigSpec.IntValue ALLOMANTIC_PEWTER_SPIRITWEB_BONUS;
     public final ForgeConfigSpec.IntValue FERUCHEMICAL_GOLD_SPIRITWEB_BONUS;
 	public final ForgeConfigSpec.DoubleValue IRON_SPIKE_STRENGTH_MULTIPLIER;
+	public final ForgeConfigSpec.DoubleValue SPIKE_PIERCE_THRESHOLD;
+	public final ForgeConfigSpec.IntValue SPIKE_COOLDOWN_TICKS;
 
 
 	HemalurgyServerConfig()
@@ -38,6 +40,8 @@ public class HemalurgyServerConfig implements ICosmereConfig
         ALLOMANTIC_PEWTER_SPIRITWEB_BONUS = builder.comment("What bonus does Allomantic pewter grant spiritweb integrity.").defineInRange("allomanticPewterSpiritwebBonus", 3, 0, 100);
         FERUCHEMICAL_GOLD_SPIRITWEB_BONUS = builder.comment("What bonus does Feruchemical gold grant spiritweb integrity.").defineInRange("feruchemicalGoldSpiritwebBonus", 6, 0, 100);
 		IRON_SPIKE_STRENGTH_MULTIPLIER = builder.comment("What percentage of a killed entity's base attack damage should an iron spike steal?").defineInRange("ironSpikeStrengthMultiplier", 0.7D, 0D, 100D);
+		SPIKE_PIERCE_THRESHOLD = builder.comment("The amount of health a entity has to be under to pierce them with a spike.").defineInRange("spikePierceThreshold", 10.0, 0.01, Double.MAX_VALUE);
+		SPIKE_COOLDOWN_TICKS = builder.comment("The amount of ticks a spike should be on cooldown after piercing.").defineInRange("spikeCooldownTicks", 20, 1, Integer.MAX_VALUE);
 
 		builder.pop();
 		configSpec = builder.build();
