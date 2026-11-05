@@ -111,11 +111,13 @@ public class AllomancyBrass extends AllomancyManifestation
 					{
 						case 2:
 							if (allomanticStrength > 15)
+							{
 								mob.addEffect(EffectsHelper.getNewEffect(
 										AllomancyEffects.ALLOMANTIC_BRASS_STUN.getMobEffect(),
 										0,      // no amplification system in place
 										20 * 5
 								));
+							}
 							mob.setTarget(null);
 						case 1:
 							mob.setAggressive(false);

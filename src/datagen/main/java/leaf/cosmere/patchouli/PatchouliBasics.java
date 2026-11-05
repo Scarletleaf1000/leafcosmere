@@ -32,7 +32,7 @@ public class PatchouliBasics
 
 			BookStuff.Page firstPage = new BookStuff.TextPage();
 			firstPage.setTitle("Investiture (For Dummies)");
-			firstPage.setText("%s is a concept functioning like matter or energy. It makes up 16 godlike beings called %s, as well as many other mystical or magical things. ".formatted(PatchouliTextFormat.Thing("Investiture"),PatchouliTextFormat.Thing("Shards")) +
+			firstPage.setText("%s is a concept functioning like matter or energy. It makes up 16 godlike beings called %s, as well as many other mystical or magical things. ".formatted(PatchouliTextFormat.Thing("Investiture"), PatchouliTextFormat.Thing("Shards")) +
 					"Investiture permeates all matter and can function as a power source for several types of magics we call \"%s.\" You may already have access to one or more of these arts.".formatted(PatchouliTextFormat.Thing("Invested Arts")));
 			pages.add(firstPage);
 			BookStuff.Page secondPage = new BookStuff.TextPage();
@@ -63,7 +63,7 @@ public class PatchouliBasics
 
 			BookStuff.Page firstAndHalfPage = new BookStuff.TextPage();
 			firstAndHalfPage.setText("If you are holding (" + PatchouliTextFormat.Keybind("Shift") + ") while you are changing the mode this way, it will change by plus or minus five levels, " +
-					"If instead you are holding (" + PatchouliTextFormat.Keybind("Control") + "("+ PatchouliTextFormat.Keybind("Command") + " on Apple)) while you are changing the mode this way, it will change by plus or minus ten levels or " +
+					"If instead you are holding (" + PatchouliTextFormat.Keybind("Control") + "(" + PatchouliTextFormat.Keybind("Command") + " on Apple)) while you are changing the mode this way, it will change by plus or minus ten levels or " +
 					"to the maximum, whichever is lower. In addition if you crouch with an empty hand, you can change your power mode by scrolling." +
 					"Changing your current main power will not stop your other powers from running in the background.");
 

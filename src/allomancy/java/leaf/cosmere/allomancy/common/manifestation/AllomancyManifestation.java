@@ -275,7 +275,7 @@ public class AllomancyManifestation extends Manifestation implements IHasMetalTy
 	public float getInvestitureHud(ISpiritweb spiritweb)
 	{
 		AllomancySpiritwebSubmodule allo = (AllomancySpiritwebSubmodule) spiritweb.getSubmodule(Manifestations.ManifestationTypes.ALLOMANCY);
-		final float retVal = (float)allo.getIngestedMetal(metalType)/(AllomancyConfigs.SERVER.MAX_INGESTIBLE_METAL.get()* metalType.getAllomancyBurnTimeSeconds());
+		final float retVal = (float) allo.getIngestedMetal(metalType) / (AllomancyConfigs.SERVER.MAX_INGESTIBLE_METAL.get() * metalType.getAllomancyBurnTimeSeconds());
 		return retVal;
 	}
 
@@ -292,7 +292,8 @@ public class AllomancyManifestation extends Manifestation implements IHasMetalTy
 	{
 		AtomicReference<AllomancyInfoBlock> retVal = new AtomicReference<>(null);
 
-		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent( spiritweb -> {
+		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent(spiritweb ->
+		{
 			int x = 0;
 			int y = 0;
 			int screenWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();

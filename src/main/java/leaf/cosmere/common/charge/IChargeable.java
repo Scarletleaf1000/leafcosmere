@@ -68,7 +68,8 @@ public interface IChargeable
 				boolean isStoringIdentity = false;
 				{
 					Optional<ISpiritweb> data = SpiritwebCapability.get(entity).filter(obj -> true);
-					if (data.isPresent()) {
+					if (data.isPresent())
+					{
 						isStoringIdentity = Manifestations.ManifestationTypes.FERUCHEMY.getManifestation(Metals.MetalType.ALUMINUM.getID()).getMode(data.get()) > 0;
 					}
 				}

@@ -60,21 +60,23 @@ public class SurgebindingEngLangGen extends LanguageProvider
 	private void addItemsAndBlocks()
 	{
 		//Items and Blocks
-		List<Item> customNames = List.of(SurgebindingItems.RADIANT_ORDER_BANNER_PATTER.get(),SurgebindingItems.SURGE_BANNER_PATTERN.get());
+		List<Item> customNames = List.of(SurgebindingItems.RADIANT_ORDER_BANNER_PATTER.get(), SurgebindingItems.SURGE_BANNER_PATTERN.get());
 		for (Item item : ForgeRegistries.ITEMS.getValues())
 		{
 			final ResourceLocation registryName = RegistryHelper.get(item);
 			if (registryName.getNamespace().contentEquals(Surgebinding.MODID))
 			{
 				String localisedString = StringHelper.fixCapitalisation(registryName.getPath());
-				if(!customNames.contains(item))
+				if (!customNames.contains(item))
+				{
 					add(item.getDescriptionId(), localisedString);
+				}
 			}
 		}
-		add("item.surgebinding.surge_banner_pattern","Banner Pattern");
-		add("item.surgebinding.radiant_order_banner_pattern","Banner Pattern");
-		add("item.surgebinding.surge_banner_pattern.desc","Surge");
-		add("item.surgebinding.radiant_order_banner_pattern.desc","Radiant Order");
+		add("item.surgebinding.surge_banner_pattern", "Banner Pattern");
+		add("item.surgebinding.radiant_order_banner_pattern", "Banner Pattern");
+		add("item.surgebinding.surge_banner_pattern.desc", "Surge");
+		add("item.surgebinding.radiant_order_banner_pattern.desc", "Radiant Order");
 	}
 
 	private void addEntities()

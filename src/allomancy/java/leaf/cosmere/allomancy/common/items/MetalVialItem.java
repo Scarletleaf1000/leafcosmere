@@ -114,10 +114,10 @@ public class MetalVialItem extends BaseItem implements IHasMetalType
 		metalsInVial.forEach((metalId, amount) ->
 		{
 			ItemStack newStack;
-			if(Metals.MetalType.valueOf(metalId).isPresent())
+			if (Metals.MetalType.valueOf(metalId).isPresent())
 			{
 				Metals.MetalType metalType = Metals.MetalType.valueOf(metalId).get();
-				if(metalType.isGodMetal())
+				if (metalType.isGodMetal())
 				{
 					newStack = new ItemStack(ItemsRegistry.GOD_METAL_NUGGETS.get(metalType).asItem(), amount);
 					GodMetalNuggetItem item = (GodMetalNuggetItem) newStack.getItem();
@@ -125,7 +125,7 @@ public class MetalVialItem extends BaseItem implements IHasMetalType
 				}
 				else
 				{
-					switch(metalType)
+					switch (metalType)
 					{
 						case IRON:
 							newStack = new ItemStack(Items.IRON_NUGGET, amount);

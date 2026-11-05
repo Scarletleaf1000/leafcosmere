@@ -124,7 +124,8 @@ public class SurgebindingForgeEventsHandler
 	}
 
 	@SubscribeEvent
-	public static void onLivingHurt(LivingHurtEvent event) {
+	public static void onLivingHurt(LivingHurtEvent event)
+	{
 		DamageSource source = event.getSource();
 
 		LivingEntity entity = event.getEntity();
@@ -135,9 +136,9 @@ public class SurgebindingForgeEventsHandler
 			return;
 		}
 		// Skip if a damage type that bypasses Shardplate
-		for(ResourceKey<DamageType> type: unprotectedDamageTypes)
+		for (ResourceKey<DamageType> type : unprotectedDamageTypes)
 		{
-			if(source.is(type))
+			if (source.is(type))
 			{
 				return;
 			}

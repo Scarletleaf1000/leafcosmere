@@ -50,7 +50,7 @@ public class CadmiumStoreEffect extends FeruchemyEffectBase
 		if (strength >= 0.0)
 		{
 			// set to just low enough that bubbles appear in the hud, or potentialNextVal, whichever is lower
-			living.setAirSupply((int) Math.min(potentialNextVal, maxAirSupply-10));
+			living.setAirSupply((int) Math.min(potentialNextVal, maxAirSupply - 10));
 		}
 		else
 		{

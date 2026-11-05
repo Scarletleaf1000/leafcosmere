@@ -152,12 +152,12 @@ public class SpiritwebCapability implements ISpiritweb
 		}
 
 		CompoundTag powerSaveList = new CompoundTag();
-		for(PowerSaveState saveState: powerSaveStorage)
+		for (PowerSaveState saveState : powerSaveStorage)
 		{
 			CompoundTag data = new CompoundTag();
-			for(Manifestation manifest: saveState.manifestations.keySet())
+			for (Manifestation manifest : saveState.manifestations.keySet())
 			{
-				data.putInt(manifest.getRegistryName().toString(),saveState.manifestations.get(manifest));
+				data.putInt(manifest.getRegistryName().toString(), saveState.manifestations.get(manifest));
 			}
 			powerSaveList.put(Integer.toString(saveState.num), data);
 		}
@@ -222,16 +222,16 @@ public class SpiritwebCapability implements ISpiritweb
 		if (nbt.contains("PowerSaveStates"))
 		{
 			CompoundTag saveNBT = (CompoundTag) nbt.get("PowerSaveStates");
-			for(PowerSaveState state : powerSaveStorage)
+			for (PowerSaveState state : powerSaveStorage)
 			{
 				CompoundTag data = (CompoundTag) saveNBT.get(Integer.toString(state.num));
 
-				if(data == null)
+				if (data == null)
 				{
 					continue;
 				}
 
-				HashMap<Manifestation,Integer> manifestations = new HashMap<>();
+				HashMap<Manifestation, Integer> manifestations = new HashMap<>();
 
 				for (Manifestation manifestation : CosmereAPI.manifestationRegistry())
 				{
@@ -628,7 +628,9 @@ public class SpiritwebCapability implements ISpiritweb
 		for (int i = 0; i < type.getNumberOfManifestations(); i++)
 		{
 			if (hasManifestation(type.getManifestation(i)))
+			{
 				return true;
+			}
 		}
 		return false;
 	}
@@ -744,7 +746,7 @@ public class SpiritwebCapability implements ISpiritweb
 	public HashMap<Manifestation, Integer> getManifestations(boolean ignoreTemporaryPower, boolean ignoreInactivePower)
 	{
 		HashMap<Manifestation, Integer> list = new HashMap<>();
-		for (Manifestation manifestation: CosmereAPI.manifestationRegistry())
+		for (Manifestation manifestation : CosmereAPI.manifestationRegistry())
 		{
 			if (manifestation == ManifestationRegistry.NONE.getManifestation())
 			{
@@ -884,13 +886,15 @@ public class SpiritwebCapability implements ISpiritweb
 	public AbstractWidget getSpiritwebHud()
 	{
 		if (spiritwebHud == null && livingEntity instanceof Player player)
+		{
 			spiritwebHud = new SpiritwebHud(player);
+		}
 		return spiritwebHud;
 	}
 
 	public void saveNewState(int num)
 	{
-		if(num < 0 || num > 8)
+		if (num < 0 || num > 8)
 		{
 			return;
 		}
@@ -900,7 +904,7 @@ public class SpiritwebCapability implements ISpiritweb
 	public void activatePowerState(int num)
 	{
 		//
-		if(num < 0 || num > 8)
+		if (num < 0 || num > 8)
 		{
 			return;
 		}
@@ -931,7 +935,7 @@ public class SpiritwebCapability implements ISpiritweb
 			 */
 			for (var manifest : manifestations.keySet())
 			{
-				if(!spiritweb.MANIFESTATIONS_MODE.containsKey(manifest))
+				if (!spiritweb.MANIFESTATIONS_MODE.containsKey(manifest))
 				{
 					return false;
 				}

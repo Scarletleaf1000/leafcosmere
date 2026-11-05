@@ -17,7 +17,6 @@ public class TogglePowerStateMessage implements ICosmerePacket
 	}
 
 
-
 	@Override
 	public void handle(NetworkEvent.Context context)
 	{

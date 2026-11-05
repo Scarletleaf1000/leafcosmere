@@ -52,7 +52,7 @@ public class ItemChargeHelper
 		Container acc = null;
 		if (curiosItemHandler.resolve().isPresent())
 		{
-			 acc = new CapWrapper(curiosItemHandler.resolve().get().getEquippedCurios());
+			acc = new CapWrapper(curiosItemHandler.resolve().get().getEquippedCurios());
 		}
 
 		List<ItemStack> toReturn = (acc != null) ? getChargeableItemStacks(acc) : new ArrayList<>();
@@ -145,7 +145,7 @@ public class ItemChargeHelper
 			Optional<ISpiritweb> data = SpiritwebCapability.get(player).filter(obj -> true);
 			if (data.isPresent())
 			{
-                isStoringIdentity = Manifestations.ManifestationTypes.FERUCHEMY.getManifestation(Metals.MetalType.ALUMINUM.getID()).getMode(data.get()) > 0;
+				isStoringIdentity = Manifestations.ManifestationTypes.FERUCHEMY.getManifestation(Metals.MetalType.ALUMINUM.getID()).getMode(data.get()) > 0;
 			}
 		}
 

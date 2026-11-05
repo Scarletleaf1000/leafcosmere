@@ -70,7 +70,7 @@ public class TabButton extends Button
 		}
 		else
 		{
-			pGuiGraphics.fill(getX(), getY(), getX()+width, getY()+height, 0x99333333);
+			pGuiGraphics.fill(getX(), getY(), getX() + width, getY() + height, 0x99333333);
 		}
 
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -88,14 +88,14 @@ public class TabButton extends Button
 		RenderSystem.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 		pGuiGraphics.blit(
 				resourceLocation,
-				getX()+1,
-				getY()+1,
+				getX() + 1,
+				getY() + 1,
 				0,
 				0,
-				width-2,
-				height-2,
-				width-2,
-				height-2
+				width - 2,
+				height - 2,
+				width - 2,
+				height - 2
 		);
 
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);

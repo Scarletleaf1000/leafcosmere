@@ -78,9 +78,12 @@ public class FeruchemySpiritwebSubmodule implements ISpiritwebSubmodule
 	@OnlyIn(Dist.CLIENT)
 	public void registerMenu()
 	{
-		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent( (spiritweb) -> {
+		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent((spiritweb) ->
+		{
 			if (spiritweb.hasManifestationOfType(Manifestations.ManifestationTypes.FERUCHEMY))
+			{
 				SpiritwebRegistry.getInstance().register(Manifestations.ManifestationTypes.FERUCHEMY, FeruchemySpiritwebMenu::new);
+			}
 		});
 	}
 

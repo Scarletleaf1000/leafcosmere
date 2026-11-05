@@ -23,7 +23,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class GodMetalNuggetsDecompress extends CustomRecipe {
+public class GodMetalNuggetsDecompress extends CustomRecipe
+{
 
 	Ingredient INGREDIENT_GOD_METAL_ALLOY_NUG = Ingredient.of(ItemsRegistry.GOD_METAL_ALLOY_NUGGETS.values().stream()
 			.flatMap(inner -> inner.values().stream())
@@ -42,27 +43,43 @@ public class GodMetalNuggetsDecompress extends CustomRecipe {
 	{
 		int itemCount = 0;
 		IHasSize item = null;
-		for(int i = 0; i < inv.getContainerSize(); i++)
+		for (int i = 0; i < inv.getContainerSize(); i++)
 		{
 			ItemStack itemStack = inv.getItem(i);
-			if(itemStack.isEmpty()) continue;
+			if (itemStack.isEmpty())
+			{
+				continue;
+			}
 
-			if(INGREDIENT_GOD_METAL_ALLOY_NUG.test(inv.getItem(i)) || INGREDIENT_GOD_METAL_NUG.test(inv.getItem(i)))
+			if (INGREDIENT_GOD_METAL_ALLOY_NUG.test(inv.getItem(i)) || INGREDIENT_GOD_METAL_NUG.test(inv.getItem(i)))
 			{
 				itemCount++;
-				if(itemCount > 1) return false;
+				if (itemCount > 1)
+				{
+					return false;
+				}
 
 				item = (IHasSize) itemStack.getItem();
 				int currentSize = item.readMetalAlloySizeNbtData(itemStack);
-				if(currentSize == item.getMinSize()) return false; // No splitting smallest size
-				if(currentSize % 2 == 1) return false; // No odd splitting
+				if (currentSize == item.getMinSize())
+				{
+					return false; // No splitting smallest size
+				}
+				if (currentSize % 2 == 1)
+				{
+					return false; // No odd splitting
+				}
 			}
-			else {
+			else
+			{
 				return false;
 			}
 		}
-		if(itemCount != 1) return false;
-		
+		if (itemCount != 1)
+		{
+			return false;
+		}
+
 		return true;
 	}
 
@@ -71,9 +88,9 @@ public class GodMetalNuggetsDecompress extends CustomRecipe {
 	{
 		Item item = null;
 		int index = 0;
-		for(int i = 0; i < inv.getContainerSize(); i++)
+		for (int i = 0; i < inv.getContainerSize(); i++)
 		{
-			if(!inv.getItem(i).isEmpty())
+			if (!inv.getItem(i).isEmpty())
 			{
 				item = inv.getItem(i).getItem();
 				index = i;
@@ -82,7 +99,7 @@ public class GodMetalNuggetsDecompress extends CustomRecipe {
 		}
 		ItemStack itemStack = ItemStack.EMPTY;
 
-		if(INGREDIENT_GOD_METAL_ALLOY_NUG.test(inv.getItem(index)))
+		if (INGREDIENT_GOD_METAL_ALLOY_NUG.test(inv.getItem(index)))
 		{
 			GodMetalAlloyNuggetItem gItem = (GodMetalAlloyNuggetItem) item;
 			int currentSize = gItem.readMetalAlloySizeNbtData(inv.getItem(index));
@@ -121,7 +138,8 @@ public class GodMetalNuggetsDecompress extends CustomRecipe {
 		return CosmereRecipesRegistry.GOD_METAL_NUGGETS_DECOMPRESS.get();
 	}
 
-	public @NotNull NonNullList<ItemStack> getRemainingItems(CraftingContainer pContainer) {
+	public @NotNull NonNullList<ItemStack> getRemainingItems(CraftingContainer pContainer)
+	{
 		return NonNullList.withSize(pContainer.getContainerSize(), ItemStack.EMPTY);
 	}
 

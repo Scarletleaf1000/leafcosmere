@@ -56,5 +56,7 @@ public class AllomancyEntityThread implements Runnable
 	}
 
 	@Override
-	public void run() {}
+	public void run()
+	{
+	}
 }

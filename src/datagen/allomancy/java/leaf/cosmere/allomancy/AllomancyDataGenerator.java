@@ -35,7 +35,7 @@ public class AllomancyDataGenerator
 		generator.addProvider(true, new AllomancyRecipeGen(packOutput, existingFileHelper));
 		generator.addProvider(true, new AllomancyPatchouliGen(packOutput));
 		generator.addProvider(true, new AllomancyTagProvider(packOutput, event.getLookupProvider(), existingFileHelper));
-		generator.addProvider(event.includeServer(), new AllomancyCuriosProvider(packOutput,existingFileHelper,lookupProvider));
+		generator.addProvider(event.includeServer(), new AllomancyCuriosProvider(packOutput, existingFileHelper, lookupProvider));
 
 		generator.addProvider(true, new AllomancyDatapackRegistryProvider(packOutput, event.getLookupProvider()));
 	}

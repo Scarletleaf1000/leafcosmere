@@ -1,5 +1,5 @@
 /*
-* File created 12 - 7 - 2025 ~ Soar
+ * File created 12 - 7 - 2025 ~ Soar
  */
 package leaf.cosmere.allomancy;
 

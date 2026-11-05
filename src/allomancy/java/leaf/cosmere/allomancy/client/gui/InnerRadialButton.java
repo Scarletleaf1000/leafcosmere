@@ -52,7 +52,9 @@ public class InnerRadialButton extends Button
 
 	protected InnerRadialButton(int centerX, int centerY, int segmentNr, Metals.MetalType metal, ISpiritweb spiritweb, Consumer<Manifestation> maniConsumer)
 	{
-		super(centerX, centerY, 16, 16, CommonComponents.EMPTY, (button) -> {}, DEFAULT_NARRATION);
+		super(centerX, centerY, 16, 16, CommonComponents.EMPTY, (button) ->
+		{
+		}, DEFAULT_NARRATION);
 		this.spiritweb = spiritweb;
 		metalType = metal;
 		manifestation = Manifestations.ManifestationTypes.ALLOMANCY.getManifestation(metalType.getID());
@@ -111,7 +113,8 @@ public class InnerRadialButton extends Button
 
 		double angle = Math.atan2(distanceY, distanceX);
 
-		if (angle < 0) {
+		if (angle < 0)
+		{
 			angle += 2 * Math.PI;
 		}
 
@@ -146,9 +149,13 @@ public class InnerRadialButton extends Button
 		if (isMouseOver && hasManifestation)
 		{
 			if (pButton == 0)
+			{
 				Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(manifestation, 1));
+			}
 			else
+			{
 				Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(manifestation, -1));
+			}
 
 			playDownSound(Minecraft.getInstance().getSoundManager());
 		}
@@ -182,7 +189,8 @@ public class InnerRadialButton extends Button
 			color = color.brighter();
 		}
 
-		if (manifestation instanceof AllomancyManifestation allomancyManifestation) {
+		if (manifestation instanceof AllomancyManifestation allomancyManifestation)
+		{
 			int mode = allomancyManifestation.getMode(spiritweb);
 			float intensity = Math.min(Math.abs(mode) * 0.2f, 1.0f);
 
@@ -226,7 +234,7 @@ public class InnerRadialButton extends Button
 	private void renderIcon(@NotNull GuiGraphics pGuiGraphics)
 	{
 		Color metalColor = metalType.getColor();
-		float r = metalColor.getRed()/255.f, g = metalColor.getGreen()/255.f, b = metalColor.getBlue()/255.f;
+		float r = metalColor.getRed() / 255.f, g = metalColor.getGreen() / 255.f, b = metalColor.getBlue() / 255.f;
 
 		if (!hasManifestation)
 		{
@@ -242,14 +250,14 @@ public class InnerRadialButton extends Button
 
 		double midAngle = (startAngle + endAngle) / 2;
 		double midRadius = (innerRadius + outerRadius) / 1.5;
-		int iconSize = width-2;
-		int posX = centerX + (int)(Math.cos(midAngle) * midRadius) - iconSize/2;
-		int posY = centerY + (int)(Math.sin(midAngle) * midRadius) - iconSize/2;
+		int iconSize = width - 2;
+		int posX = centerX + (int) (Math.cos(midAngle) * midRadius) - iconSize / 2;
+		int posY = centerY + (int) (Math.sin(midAngle) * midRadius) - iconSize / 2;
 
 		RenderSystem.setShaderColor(0f, 0f, 0f, alpha);
 		pGuiGraphics.blit(iconLocation,
-				posX+1,
-				posY+1,
+				posX + 1,
+				posY + 1,
 				iconSize,
 				iconSize,
 				0,
@@ -298,10 +306,16 @@ public class InnerRadialButton extends Button
 				if (distSq <= radiusSq)
 				{
 					float angle = (float) Math.atan2(pixelCenterY, pixelCenterX);
-					if (angle < 0) angle += (float) (Math.PI * 2);
+					if (angle < 0)
+					{
+						angle += (float) (Math.PI * 2);
+					}
 
 					float diff = angle - startAngle;
-					if (diff < 0) diff += (float) (Math.PI * 2);
+					if (diff < 0)
+					{
+						diff += (float) (Math.PI * 2);
+					}
 
 					if (diff < radsPerSegment)
 					{

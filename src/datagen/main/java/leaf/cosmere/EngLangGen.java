@@ -233,16 +233,16 @@ public class EngLangGen extends LanguageProvider
 		String allo = "Activate Allomantic ";
 		String feru = "Activate Feruchemic ";
 		String surge = "Activate Surgebinding ";
-		for(Metals.MetalType metalType: EnumUtils.METAL_TYPES)
+		for (Metals.MetalType metalType : EnumUtils.METAL_TYPES)
 		{
-			if(!metalType.hasFeruchemicalEffect())
+			if (!metalType.hasFeruchemicalEffect())
 			{
 				continue;
 			}
 			add(KEY_ALLOMANCY + metalType.getName(), allo + StringHelper.fixCapitalisation(metalType.getName()));
 			add(KEY_FERUCHEMY + metalType.getName(), feru + StringHelper.fixCapitalisation(metalType.getName()));
 		}
-		for(Roshar.Surges i : EnumUtils.SURGES)
+		for (Roshar.Surges i : EnumUtils.SURGES)
 		{
 			add(KEY_STORMLIGHT + i.getName(), surge + StringHelper.fixCapitalisation(i.getName()));
 		}

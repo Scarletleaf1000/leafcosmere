@@ -159,8 +159,8 @@ public class AllomancyEntityEventHandler
 					// Reduce damage taken by entity
 					event.setAmount(remaining);
 
-					var damage =  (int) (item.getDamage(stack) + Math.ceil(absorbed));
-					item.setDamage(stack,  damage);
+					var damage = (int) (item.getDamage(stack) + Math.ceil(absorbed));
+					item.setDamage(stack, damage);
 					// If we successfully reduce damage, we don't need to keep going.
 
 					if (item.getDamage(stack) >= item.getMaxDamage(stack))
@@ -168,7 +168,7 @@ public class AllomancyEntityEventHandler
 						item.curioBreak(slotResult.slotContext(), stack);
 					}
 					break;
-					}
+				}
 			}
 		}
 		// Find the curio item that acts as armor

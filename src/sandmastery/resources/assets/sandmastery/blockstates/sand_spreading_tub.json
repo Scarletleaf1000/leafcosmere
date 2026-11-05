@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "sandmastery:block/sand_spreading_tub" }
+    "": {
+      "model": "sandmastery:block/sand_spreading_tub"
+    }
   }
 }

@@ -86,7 +86,6 @@ public class GoldTapEffect extends FeruchemyEffectBase
 	}
 
 
-
 	public static void onLivingHurtEvent(LivingHurtEvent event)
 	{
 		if (event.isCanceled())

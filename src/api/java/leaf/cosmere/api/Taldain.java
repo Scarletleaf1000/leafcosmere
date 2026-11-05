@@ -14,10 +14,10 @@ public class Taldain
 	{
 		ELEVATE(0),
 		PLATFORM(1),
-//		STAIR(2),
+		//		STAIR(2),
 		LAUNCH(3),
 		PROJECTILE(4),
-//		WALL(5),
+		//		WALL(5),
 //		SHIELD(6),
 //		BUILDING(7),
 //		DECOY(8),
@@ -25,7 +25,10 @@ public class Taldain
 
 		private final int id;
 
-		Mastery(int id) { this.id = id; }
+		Mastery(int id)
+		{
+			this.id = id;
+		}
 
 		public static Optional<Mastery> valueOf(int value)
 		{

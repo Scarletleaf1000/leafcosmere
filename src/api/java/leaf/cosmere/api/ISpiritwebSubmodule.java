@@ -69,10 +69,10 @@ public interface ISpiritwebSubmodule
 	default List<AttributeInstance> getEntityPowers(LivingEntity entity)
 	{
 		List<AttributeInstance> powers = new ArrayList<>();
-		for(Attribute attribute : getPowers())
+		for (Attribute attribute : getPowers())
 		{
 			AttributeInstance instance = entity.getAttribute(attribute);
-			if(instance != null && instance.getBaseValue() > 0)
+			if (instance != null && instance.getBaseValue() > 0)
 			{
 				powers.add(instance);
 			}

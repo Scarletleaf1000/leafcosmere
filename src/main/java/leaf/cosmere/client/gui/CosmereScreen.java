@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 public class CosmereScreen extends Screen
 {
 	protected final Consumer<Manifestation> manifestationConsumer;
+
 	protected CosmereScreen(Component pTitle, Consumer<Manifestation> manifestationConsumer)
 	{
 		super(pTitle);

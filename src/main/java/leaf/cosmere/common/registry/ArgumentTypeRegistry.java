@@ -18,16 +18,16 @@ public class ArgumentTypeRegistry
 
 	public static final RegistryObject<ArgumentTypeInfo<?, ?>> MANIFESTATION_ARGUMENT_TYPE = ARGUMENT_TYPE_INFOS.register("manifestation_argument_type",
 			() -> ArgumentTypeInfos.registerByClass(
-							ManifestationsArgumentType.class,
-							SingletonArgumentInfo.contextFree(ManifestationsArgumentType::createArgument)));
+					ManifestationsArgumentType.class,
+					SingletonArgumentInfo.contextFree(ManifestationsArgumentType::createArgument)));
 
 	public static final RegistryObject<ArgumentTypeInfo<?, ?>> ALLOMANCY_ARGUMENT_TYPE = ARGUMENT_TYPE_INFOS.register("allomancy_argument_type",
 			() -> ArgumentTypeInfos.registerByClass(
-									AllomancyArgumentType.class,
-									SingletonArgumentInfo.contextFree(AllomancyArgumentType::createArgument)));
+					AllomancyArgumentType.class,
+					SingletonArgumentInfo.contextFree(AllomancyArgumentType::createArgument)));
 
 	public static final RegistryObject<ArgumentTypeInfo<?, ?>> FERUCHEMY_ARGUMENT_TYPE = ARGUMENT_TYPE_INFOS.register("feruchemy_argument_type",
 			() -> ArgumentTypeInfos.registerByClass(
-									FeruchemyArgumentType.class,
-									SingletonArgumentInfo.contextFree(FeruchemyArgumentType::createArgument)));
+					FeruchemyArgumentType.class,
+					SingletonArgumentInfo.contextFree(FeruchemyArgumentType::createArgument)));
 }

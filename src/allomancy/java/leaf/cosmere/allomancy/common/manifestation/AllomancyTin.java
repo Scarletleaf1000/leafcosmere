@@ -44,7 +44,8 @@ public class AllomancyTin extends AllomancyManifestation
 	}
 
 	@Override
-	public void onModeChange(ISpiritweb data, int lastMode) {
+	public void onModeChange(ISpiritweb data, int lastMode)
+	{
 		super.onModeChange(data, lastMode);
 
 		if (data.getLiving().level().isClientSide())
@@ -81,7 +82,7 @@ public class AllomancyTin extends AllomancyManifestation
 		}
 
 		// show particles from sound origins towards player burning tin
-        if (living.level().isClientSide() && living instanceof LocalPlayer)
+		if (living.level().isClientSide() && living instanceof LocalPlayer)
 		{
 			soundPosMap.entrySet().removeIf(entry -> entry.getValue() <= 0);
 
@@ -99,7 +100,7 @@ public class AllomancyTin extends AllomancyManifestation
 					living.level().addParticle(vib, v.x, v.y, v.z, 1D, 1D, 1D);
 				}
 
-				soundPosMap.put(v, soundPosMap.get(v)-1);
+				soundPosMap.put(v, soundPosMap.get(v) - 1);
 			}
 		}
 	}
@@ -108,7 +109,9 @@ public class AllomancyTin extends AllomancyManifestation
 	public static void onSound(PlaySoundEvent event)
 	{
 		if (Minecraft.getInstance().level == null)
+		{
 			return;
+		}
 
 		SoundInstance eventSound = event.getSound();
 		AllomancyTin tinAllomancy = (AllomancyTin) AllomancyManifestations.ALLOMANCY_POWERS.get(Metals.MetalType.TIN).get();
@@ -124,7 +127,9 @@ public class AllomancyTin extends AllomancyManifestation
 		{
 			// if is rain and config is not enabled, return
 			if (event.getName().equals("weather.rain") && !AllomancyConfigs.CLIENT.canHearRain.get())
+			{
 				return;
+			}
 
 			boolean isBronzeSound = event.getName().equals("block.note_block.basedrum");
 			if (tinAllomancy.isActive(playerSpiritweb) && !isBronzeSound)
@@ -136,7 +141,7 @@ public class AllomancyTin extends AllomancyManifestation
 
 				if (distance < range)
 				{
-					soundPosMap.put(soundPos, 20);	// timer in ticks
+					soundPosMap.put(soundPos, 20);    // timer in ticks
 				}
 			}
 		});

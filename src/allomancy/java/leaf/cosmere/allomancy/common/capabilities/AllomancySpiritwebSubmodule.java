@@ -344,9 +344,12 @@ public class AllomancySpiritwebSubmodule implements ISpiritwebSubmodule
 	@OnlyIn(Dist.CLIENT)
 	public void registerMenu()
 	{
-		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent( (spiritweb) -> {
+		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent((spiritweb) ->
+		{
 			if (spiritweb.hasManifestationOfType(Manifestations.ManifestationTypes.ALLOMANCY))
+			{
 				SpiritwebRegistry.getInstance().register(Manifestations.ManifestationTypes.ALLOMANCY, AllomancySpiritwebMenu::new);
+			}
 		});
 	}
 

@@ -164,7 +164,9 @@ public class EntityEventHandler
 		}
 
 		final Integer chanceOfFullPowers = CosmereConfigs.SERVER_CONFIG.FULLBORN_POWERS_CHANCE.get();
-		final Integer chanceOfTwinborn = isPlayerEntity ? CosmereConfigs.SERVER_CONFIG.TWINBORN_POWERS_CHANCE_PLAYER.get() : CosmereConfigs.SERVER_CONFIG.TWINBORN_POWERS_CHANCE_MOB.get();
+		final Integer chanceOfTwinborn =
+				isPlayerEntity ? CosmereConfigs.SERVER_CONFIG.TWINBORN_POWERS_CHANCE_PLAYER.get()
+				               : CosmereConfigs.SERVER_CONFIG.TWINBORN_POWERS_CHANCE_MOB.get();
 		//low chance of having full powers of one type
 		//0-15 inclusive is normal powers.
 		boolean isFullPowersFromOneType = MathHelper.chance(chanceOfFullPowers);
@@ -194,8 +196,8 @@ public class EntityEventHandler
 			if (allomancyLoaded && feruchemyLoaded)
 			{
 				manifestationType = isAllomancy
-									? Manifestations.ManifestationTypes.ALLOMANCY
-									: Manifestations.ManifestationTypes.FERUCHEMY;
+				                    ? Manifestations.ManifestationTypes.ALLOMANCY
+				                    : Manifestations.ManifestationTypes.FERUCHEMY;
 			}
 			else if (allomancyLoaded)
 			{
@@ -254,21 +256,23 @@ public class EntityEventHandler
 						spiritwebCapability.getSubmodule(Manifestations.ManifestationTypes.FERUCHEMY).GiveStartingItem(player, feruchemyPower);
 					}
 					CosmereAPI.logger.info(
-						"Entity {} has been granted feruchemical {}!",
-						spiritwebCapability.getLiving().getName().getString(),
-						feruchemyMetal);
+							"Entity {} has been granted feruchemical {}!",
+							spiritwebCapability.getLiving().getName().getString(),
+							feruchemyMetal);
 				}
 			}
 			else
 			{
 				Manifestation manifestation;
-				isAllomancy = isPlayerEntity ? MathHelper.randomInt(0, 99) < CosmereConfigs.SERVER_CONFIG.PLAYER_MISTING_TO_FERRING_DISTRIBUTION.get() : MathHelper.randomBool();
+				isAllomancy = isPlayerEntity
+				              ? MathHelper.randomInt(0, 99) < CosmereConfigs.SERVER_CONFIG.PLAYER_MISTING_TO_FERRING_DISTRIBUTION.get()
+				              : MathHelper.randomBool();
 				if (allomancyLoaded && feruchemyLoaded)
 				{
 					manifestation =
-						isAllomancy
-						? allomancyPower
-						: feruchemyPower;
+							isAllomancy
+							? allomancyPower
+							: feruchemyPower;
 				}
 				else if (allomancyLoaded)
 				{
@@ -287,7 +291,8 @@ public class EntityEventHandler
 				spiritwebCapability.giveManifestation(manifestation, 9);
 				if (spiritwebCapability.getLiving() instanceof Player player)
 				{
-					spiritwebCapability.getSubmodule(isAllomancy ? Manifestations.ManifestationTypes.ALLOMANCY : Manifestations.ManifestationTypes.FERUCHEMY).GiveStartingItem(player, manifestation);
+					spiritwebCapability.getSubmodule(isAllomancy ? Manifestations.ManifestationTypes.ALLOMANCY
+					                                             : Manifestations.ManifestationTypes.FERUCHEMY).GiveStartingItem(player, manifestation);
 				}
 				CosmereAPI.logger.info("Entity {} has been granted {}, with metal {}!",
 						spiritwebCapability.getLiving().getName().getString(),

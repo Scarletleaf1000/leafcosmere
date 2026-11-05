@@ -46,7 +46,7 @@ public class RequestStormlight implements ICosmerePacket
 				{
 					ssm.requestStormlight();
 				}
-				else if(SurgebindingManifestations.SURGEBINDING_POWERS.values().stream()
+				else if (SurgebindingManifestations.SURGEBINDING_POWERS.values().stream()
 						.anyMatch((manifestation -> cap.hasManifestation(manifestation.getManifestation()))))
 				{
 					ssm.requestStormlight();

@@ -76,16 +76,40 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 		this.attributeModifiers = builder.build();
 	}
 
+	public static boolean hasPierce(ItemStack stack)
+	{
+		return StackNBTHelper.getBoolean(stack, PIERCE_TAG, false);
+	}
+
+	@SubscribeEvent
+	public static void onEntityDeath(LivingDeathEvent event)
+	{
+		if (event.getEntity().level().isClientSide())
+		{
+			return;
+		}
+
+		if (event.getSource().getEntity() instanceof Player playerEntity)
+		{
+			SpiritwebCapability.get(playerEntity).ifPresent(iSpiritweb ->
+			{
+				ItemStack itemstack = playerEntity.getMainHandItem();
+				if (itemstack.getItem() instanceof HemalurgicSpikeItem spikeItem)
+				{
+					//entity was killed by a spike
+					//pass in killed entity for the item to figure out what to do
+					spikeItem.killedEntity(itemstack, playerEntity, event.getEntity());
+				}
+
+			});
+		}
+	}
+
 	@Override
 	public boolean canUnequip(SlotContext context, ItemStack stack)
 	{
 		boolean hasBindingCurse = EnchantmentHelper.hasBindingCurse(stack);
 		return (!hasBindingCurse || (context.entity() instanceof Player player && player.isCreative()));
-	}
-
-	public static boolean hasPierce(ItemStack stack)
-	{
-		return StackNBTHelper.getBoolean(stack, PIERCE_TAG, false);
 	}
 
 	@Override
@@ -107,7 +131,6 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 		return super.use(level, player, hand);
 	}
 
-
 	/**
 	 * generate new map of attributes for when used as a curio item.
 	 */
@@ -122,37 +145,37 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 			//add hemalurgic attributes, if any.
 			hemalurgicInfo.getHemalurgicAttributes(attributeModifiers, stack, metalType);
 
-            // add spiritweb buffs, if any
-            UUID hemalurgicIdentity = getHemalurgicIdentity(stack);
-            if (hemalurgicIdentity != null)
-            {
-                int spiritwebIntegrity = -1;
-                if (slotContext.identifier().equals("linchpin"))
-                {
-                    // linchpin always gives a bonus (+3 default)
-                    spiritwebIntegrity += HemalurgyConfigs.SERVER.LINCHPIN_SPIKE_SPIRITWEB_BONUS.get();
-                    Manifestation aPewter = CosmereAPI.manifestationRegistry().getValue(new ResourceLocation("allomancy", Metals.MetalType.PEWTER.getName()));
-                    if (aPewter != null && attributeModifiers.containsKey(aPewter.getAttribute()))
-                    {
-                        // pewter gives an additional bonus (+3 default)
-                        spiritwebIntegrity += HemalurgyConfigs.SERVER.ALLOMANTIC_PEWTER_SPIRITWEB_BONUS.get();
-                    }
-                    Manifestation fGold = CosmereAPI.manifestationRegistry().getValue((new ResourceLocation("feruchemy", Metals.MetalType.GOLD.getName())));
-                    if (fGold != null && attributeModifiers.containsKey(fGold.getAttribute()))
-                    {
-                        // f-gold gives an extra bonus (+6 default)
-                        spiritwebIntegrity += HemalurgyConfigs.SERVER.FERUCHEMICAL_GOLD_SPIRITWEB_BONUS.get();
-                    }
-                }
+			// add spiritweb buffs, if any
+			UUID hemalurgicIdentity = getHemalurgicIdentity(stack);
+			if (hemalurgicIdentity != null)
+			{
+				int spiritwebIntegrity = -1;
+				if (slotContext.identifier().equals("linchpin"))
+				{
+					// linchpin always gives a bonus (+3 default)
+					spiritwebIntegrity += HemalurgyConfigs.SERVER.LINCHPIN_SPIKE_SPIRITWEB_BONUS.get();
+					Manifestation aPewter = CosmereAPI.manifestationRegistry().getValue(new ResourceLocation("allomancy", Metals.MetalType.PEWTER.getName()));
+					if (aPewter != null && attributeModifiers.containsKey(aPewter.getAttribute()))
+					{
+						// pewter gives an additional bonus (+3 default)
+						spiritwebIntegrity += HemalurgyConfigs.SERVER.ALLOMANTIC_PEWTER_SPIRITWEB_BONUS.get();
+					}
+					Manifestation fGold = CosmereAPI.manifestationRegistry().getValue((new ResourceLocation("feruchemy", Metals.MetalType.GOLD.getName())));
+					if (fGold != null && attributeModifiers.containsKey(fGold.getAttribute()))
+					{
+						// f-gold gives an extra bonus (+6 default)
+						spiritwebIntegrity += HemalurgyConfigs.SERVER.FERUCHEMICAL_GOLD_SPIRITWEB_BONUS.get();
+					}
+				}
 
-                attributeModifiers.put(HemalurgyAttributes.SPIRITWEB_INTEGRITY.getAttribute(),
-                        new AttributeModifier(
-                                hemalurgicIdentity,
-                                "Spiritweb Integrity",
-                                spiritwebIntegrity,
-                                AttributeModifier.Operation.ADDITION
-                        ));
-            }
+				attributeModifiers.put(HemalurgyAttributes.SPIRITWEB_INTEGRITY.getAttribute(),
+						new AttributeModifier(
+								hemalurgicIdentity,
+								"Spiritweb Integrity",
+								spiritwebIntegrity,
+								AttributeModifier.Operation.ADDITION
+						));
+			}
 		}
 
 
@@ -304,7 +327,6 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 		return false;
 	}
 
-
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn)
@@ -314,36 +336,11 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 		// no extra info if there isn't any
 		if (getHemalurgicIdentity(stack) == null)
 		{
-			return;
 		}
 		//stolen identities listed?
 
-        //don't need to do the attributes, since thats covered by curio
+		//don't need to do the attributes, since thats covered by curio
 
-    }
-
-	@SubscribeEvent
-	public static void onEntityDeath(LivingDeathEvent event)
-	{
-		if (event.getEntity().level().isClientSide())
-		{
-			return;
-		}
-
-		if (event.getSource().getEntity() instanceof Player playerEntity)
-		{
-			SpiritwebCapability.get(playerEntity).ifPresent(iSpiritweb ->
-			{
-				ItemStack itemstack = playerEntity.getMainHandItem();
-				if (itemstack.getItem() instanceof HemalurgicSpikeItem spikeItem)
-				{
-					//entity was killed by a spike
-					//pass in killed entity for the item to figure out what to do
-					spikeItem.killedEntity(itemstack, playerEntity, event.getEntity());
-				}
-
-			});
-		}
 	}
 
 	public void killedEntity(ItemStack stack, Player playerEntity, LivingEntity entityKilled)

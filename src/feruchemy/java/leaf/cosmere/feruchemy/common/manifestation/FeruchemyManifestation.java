@@ -115,8 +115,11 @@ public class FeruchemyManifestation extends Manifestation implements IHasMetalTy
 		collectMenuInfo();
 		double maximum = metalmindMaxChargesMap.getOrDefault(metalType, 0d);
 		double charge = metalmindChargesMap.getOrDefault(metalType, 0d);
-		if (maximum <= 0) return 0.f;
-		return (float) (charge/maximum);
+		if (maximum <= 0)
+		{
+			return 0.f;
+		}
+		return (float) (charge / maximum);
 	}
 
 	protected CosmereEffect getTappingEffect()
@@ -223,7 +226,8 @@ public class FeruchemyManifestation extends Manifestation implements IHasMetalTy
 	{
 		AtomicReference<FeruchemyInfoBlock> retVal = new AtomicReference<>(null);
 
-		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent( spiritweb -> {
+		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent(spiritweb ->
+		{
 			int x = 0;
 			int y = 0;
 			int screenWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();

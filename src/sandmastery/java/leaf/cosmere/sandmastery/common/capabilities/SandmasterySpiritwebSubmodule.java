@@ -214,9 +214,12 @@ public class SandmasterySpiritwebSubmodule implements ISpiritwebSubmodule
 	@OnlyIn(Dist.CLIENT)
 	public void registerMenu()
 	{
-		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent(spiritweb -> {
+		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent(spiritweb ->
+		{
 			if (spiritweb.hasManifestationOfType(Manifestations.ManifestationTypes.SANDMASTERY))
+			{
 				SpiritwebRegistry.getInstance().register(Manifestations.ManifestationTypes.SANDMASTERY, SandmasterySpiritwebMenu::new);
+			}
 		});
 	}
 

@@ -30,7 +30,6 @@ public class DynamicShardplateData extends RadiantShardData implements ICapabili
 	private boolean colored;
 
 
-
 	public DynamicShardplateData(ItemStack stack)
 	{
 		super(stack);
@@ -44,13 +43,13 @@ public class DynamicShardplateData extends RadiantShardData implements ICapabili
 		this.rightPaldronsID = "right_paldron" + MathHelper.randomInt(0, DynamicShardplateModel.TOTAL_PALDRON_IDS);
 		this.rightLegID = "rightleg_top" + MathHelper.randomInt(1, DynamicShardplateModel.TOTAL_LEG_IDS);
 		this.rightBootOutsideID = "rightboot_outside" + MathHelper.randomInt(1, DynamicShardplateModel.TOTAL_BOOT_IDS);
-		this.rightBootTipID = rightBootOutsideID.replace("outside","tip");
+		this.rightBootTipID = rightBootOutsideID.replace("outside", "tip");
 
-		this.leftArmID = rightArmID.replace("right","left");
-		this.leftPaldronsID = rightPaldronsID.replace("right","left");
-		this.leftLegID = rightLegID.replace("right","left");
-		this.leftBootOutsideID = rightBootOutsideID.replace("right","left");
-		this.leftBootTipID = rightBootTipID.replace("right","left");
+		this.leftArmID = rightArmID.replace("right", "left");
+		this.leftPaldronsID = rightPaldronsID.replace("right", "left");
+		this.leftLegID = rightLegID.replace("right", "left");
+		this.leftBootOutsideID = rightBootOutsideID.replace("right", "left");
+		this.leftBootTipID = rightBootTipID.replace("right", "left");
 
 		this.colored = true;
 	}
@@ -62,7 +61,7 @@ public class DynamicShardplateData extends RadiantShardData implements ICapabili
 		super.serializeNBT();
 
 		super.nbt.putString("headID", this.headID);
-		super.nbt.putString("faceplateID" , this.faceplateID);
+		super.nbt.putString("faceplateID", this.faceplateID);
 		super.nbt.putString("bodyID", this.bodyID);
 		super.nbt.putString("kamaID", this.kamaID);
 
@@ -113,10 +112,12 @@ public class DynamicShardplateData extends RadiantShardData implements ICapabili
 	{
 		return headID;
 	}
+
 	public String getFaceplateID()
 	{
 		return faceplateID;
 	}
+
 	public String getBodyID()
 	{
 		return bodyID;

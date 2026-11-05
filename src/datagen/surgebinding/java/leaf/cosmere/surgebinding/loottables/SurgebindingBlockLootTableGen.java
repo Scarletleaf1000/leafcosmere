@@ -39,14 +39,16 @@ public class SurgebindingBlockLootTableGen extends BaseBlockLootTables
 			{
 				this.add(oreBlock, (ore) -> createOreDrop(ore, SurgebindingItems.GEMSTONE.get(oreBlock.getGemType())));
 			}
-			if(block==SurgebindingBlocks.SAPPHIRE_CLUSTER.getBlock())
+			if (block == SurgebindingBlocks.SAPPHIRE_CLUSTER.getBlock())
 			{
-				this.add(block,(cluster)-> createSilkTouchDispatchTable(cluster, LootItem.lootTableItem(SurgebindingItems.GEMSTONE.get(Roshar.Gemstone.SAPPHIRE)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(cluster, LootItem.lootTableItem(SurgebindingItems.GEMSTONE.get(Roshar.Gemstone.SAPPHIRE)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
+				this.add(block, (cluster) -> createSilkTouchDispatchTable(cluster, LootItem.lootTableItem(SurgebindingItems.GEMSTONE.get(Roshar.Gemstone.SAPPHIRE)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES))).otherwise(this.applyExplosionDecay(cluster, LootItem.lootTableItem(SurgebindingItems.GEMSTONE.get(Roshar.Gemstone.SAPPHIRE)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
 			}
-			if(block instanceof SapphireClusterBlock clusterBlock && block!=SurgebindingBlocks.SAPPHIRE_CLUSTER.getBlock()){
+			if (block instanceof SapphireClusterBlock clusterBlock && block != SurgebindingBlocks.SAPPHIRE_CLUSTER.getBlock())
+			{
 				this.addToSkip(block);
 			}
-			if(block == SurgebindingBlocks.BUDDING_SAPPHIRE.getBlock()){
+			if (block == SurgebindingBlocks.BUDDING_SAPPHIRE.getBlock())
+			{
 				this.addToSkip(block);
 			}
 		}

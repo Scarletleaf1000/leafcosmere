@@ -14,6 +14,7 @@ import java.util.List;
 public class SandmasterySpiritwebMenu extends CosmereScreen
 {
 	final LocalPlayer player;
+
 	public SandmasterySpiritwebMenu()
 	{
 		super(Component.literal("Sandmastery"), SpiritwebMenu::selectManiCallback);
@@ -25,10 +26,11 @@ public class SandmasterySpiritwebMenu extends CosmereScreen
 	{
 		super.init();
 
-		int centerX = width/2;
-		int centerY = height/2 + height/16;
+		int centerX = width / 2;
+		int centerY = height / 2 + height / 16;
 
-		SpiritwebCapability.get(player).ifPresent( (spiritweb -> {
+		SpiritwebCapability.get(player).ifPresent((spiritweb ->
+		{
 			final List<Manifestation> availableManifestations = spiritweb.getAvailableManifestations();
 
 			int i = 0;
@@ -36,7 +38,7 @@ public class SandmasterySpiritwebMenu extends CosmereScreen
 			{
 				if (mani.getManifestationType() == Manifestations.ManifestationTypes.SANDMASTERY)
 				{
-					addRenderableWidget(new RadialButton(centerX, centerY, height/3, i, mani, manifestationConsumer));
+					addRenderableWidget(new RadialButton(centerX, centerY, height / 3, i, mani, manifestationConsumer));
 					i++;
 				}
 			}

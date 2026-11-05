@@ -161,6 +161,9 @@ public class Manifestation implements IManifestationProvider
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public AbstractWidget getInfoBlock() { return null; }
+	public AbstractWidget getInfoBlock()
+	{
+		return null;
+	}
 
 }

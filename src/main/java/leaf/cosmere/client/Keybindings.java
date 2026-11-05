@@ -42,6 +42,7 @@ public class Keybindings
 
 	public static KeyMapping ACTIVATE_POWER_SAVE;
 	public static KeyMapping SAVE_POWER_SAVE;
+
 	@SubscribeEvent
 	public static void register(RegisterKeyMappingsEvent event)
 	{

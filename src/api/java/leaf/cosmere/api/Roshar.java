@@ -316,7 +316,7 @@ public class Roshar
 
 		public boolean hasBlade()
 		{
-			if(this == RadiantOrder.BONDSMITH)
+			if (this == RadiantOrder.BONDSMITH)
 			{
 				return false;
 			}
@@ -357,6 +357,7 @@ public class Roshar
 
 			};
 		}
+
 		public String getSprenOrBondsmith(int spren)
 		{
 			return this.getSprenOrBondsmith(spren, true);
@@ -364,7 +365,7 @@ public class Roshar
 
 		public String getSprenOrBondsmith(int spren, boolean newSpren)
 		{
-			if(this.equals(RadiantOrder.BONDSMITH)  || (spren >= 1 && spren <= 3))
+			if (this.equals(RadiantOrder.BONDSMITH) || (spren >= 1 && spren <= 3))
 			{
 				if (newSpren)
 				{

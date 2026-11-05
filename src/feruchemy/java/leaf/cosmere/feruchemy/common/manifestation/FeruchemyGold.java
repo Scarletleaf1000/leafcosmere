@@ -16,6 +16,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class FeruchemyGold extends FeruchemyManifestation
 {
 	private static final int MIN_TAP_FOR_EXTRA_HEALTH = 5;
+
 	public FeruchemyGold(Metals.MetalType metalType)
 	{
 		super(metalType);
@@ -82,6 +83,6 @@ public class FeruchemyGold extends FeruchemyManifestation
 
 	public static int getHealActiveTick(int strength)
 	{
-		return (int) Math.floor(200*Math.pow(strength, -1.5D));
+		return (int) Math.floor(200 * Math.pow(strength, -1.5D));
 	}
 }

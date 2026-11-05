@@ -129,7 +129,7 @@ public class Koloss extends AbstractIllager
 				.add(Attributes.ATTACK_DAMAGE, 12.0D)
 				.add(Attributes.ATTACK_KNOCKBACK, 1.5D)
 				.add(ForgeMod.STEP_HEIGHT_ADDITION.get(), 1.1D);
-		}
+	}
 
 	@Nullable
 	@Override

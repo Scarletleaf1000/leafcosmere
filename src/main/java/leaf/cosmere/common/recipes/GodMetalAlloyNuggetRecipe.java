@@ -50,22 +50,37 @@ public class GodMetalAlloyNuggetRecipe extends CustomRecipe
 				Items.GOLD_NUGGET
 		);
 
-		if(!INGREDIENT_GOD_METAL_NUG.test(inv.getItem(4))) return false;
-		if(inv.getItem(4).getCount() != 1) return false;
+		if (!INGREDIENT_GOD_METAL_NUG.test(inv.getItem(4)))
+		{
+			return false;
+		}
+		if (inv.getItem(4).getCount() != 1)
+		{
+			return false;
+		}
 
 		MetalType metalType = null;
-		for(int i = 0; i < inv.getContainerSize(); i++)
+		for (int i = 0; i < inv.getContainerSize(); i++)
 		{
-			if(i == 4) continue;
+			if (i == 4)
+			{
+				continue;
+			}
 			ItemStack itemStack = inv.getItem(i);
 
-			if(INGREDIENT_COSMERE_METAL_NUG.test(itemStack))
+			if (INGREDIENT_COSMERE_METAL_NUG.test(itemStack))
 			{
 				MetalNuggetItem item = (MetalNuggetItem) itemStack.getItem();
-				if(i == 0) metalType = item.getMetalType();
-				if(metalType != item.getMetalType()) return false;
+				if (i == 0)
+				{
+					metalType = item.getMetalType();
+				}
+				if (metalType != item.getMetalType())
+				{
+					return false;
+				}
 			}
-			else if(INGREDIENT_MC_METAL_NUG.test(itemStack))
+			else if (INGREDIENT_MC_METAL_NUG.test(itemStack))
 			{
 				Item item = itemStack.getItem();
 				MetalType newMetalType;
@@ -73,15 +88,22 @@ public class GodMetalAlloyNuggetRecipe extends CustomRecipe
 				{
 					newMetalType = MetalType.IRON;
 				}
-				else if(item == Items.GOLD_NUGGET)
+				else if (item == Items.GOLD_NUGGET)
 				{
 					newMetalType = MetalType.GOLD;
 				}
-				else {
+				else
+				{
 					return false;
 				}
-				if(i == 0) metalType = newMetalType;
-				if(metalType != newMetalType) return false;
+				if (i == 0)
+				{
+					metalType = newMetalType;
+				}
+				if (metalType != newMetalType)
+				{
+					return false;
+				}
 			}
 			else
 			{
@@ -98,7 +120,7 @@ public class GodMetalAlloyNuggetRecipe extends CustomRecipe
 		MetalType godMetalType = godMetalNuggetItem.getMetalType();
 
 		MetalType metalType = null;
-		if(inv.getItem(0).getItem() == Items.IRON_NUGGET)
+		if (inv.getItem(0).getItem() == Items.IRON_NUGGET)
 		{
 			metalType = MetalType.IRON;
 		}
@@ -141,12 +163,15 @@ public class GodMetalAlloyNuggetRecipe extends CustomRecipe
 	}
 
 
-	public @NotNull NonNullList<ItemStack> getRemainingItems(CraftingContainer pContainer) {
+	public @NotNull NonNullList<ItemStack> getRemainingItems(CraftingContainer pContainer)
+	{
 		NonNullList<ItemStack> nonnulllist = NonNullList.withSize(pContainer.getContainerSize(), ItemStack.EMPTY);
 
-		for(int i = 0; i < nonnulllist.size(); ++i) {
+		for (int i = 0; i < nonnulllist.size(); ++i)
+		{
 			ItemStack item = pContainer.getItem(i);
-			if (item.hasCraftingRemainingItem()) {
+			if (item.hasCraftingRemainingItem())
+			{
 				nonnulllist.set(i, getCraftingRemainingItem(item));
 			}
 		}
@@ -154,13 +179,17 @@ public class GodMetalAlloyNuggetRecipe extends CustomRecipe
 		return nonnulllist;
 	}
 
-	public ItemStack getCraftingRemainingItem(ItemStack stack) {
+	public ItemStack getCraftingRemainingItem(ItemStack stack)
+	{
 		ItemStack out = stack.copy();
 		IHasSize item = (IHasSize) stack.getItem();
 		int size = item.readMetalAlloySizeNbtData(stack);
 
 		int newSize = size - 1;
-		if (newSize < 1) return ItemStack.EMPTY;
+		if (newSize < 1)
+		{
+			return ItemStack.EMPTY;
+		}
 
 		item.writeMetalAlloySizeNbtData(out, newSize);
 		return out;

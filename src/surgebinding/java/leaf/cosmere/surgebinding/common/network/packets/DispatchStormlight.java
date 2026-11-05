@@ -38,8 +38,8 @@ public class DispatchStormlight implements ICosmerePacket
 				if (ssm.getStormlight() != 0)
 				{
 					if (ssm.isOathed()
-						|| ssm.isHerald()
-						|| SurgebindingManifestations.SURGEBINDING_POWERS.values().stream()
+							|| ssm.isHerald()
+							|| SurgebindingManifestations.SURGEBINDING_POWERS.values().stream()
 							.anyMatch((manifestation -> cap.hasManifestation(manifestation.getManifestation()))))
 					{
 						ssm.dispatchStormlight();

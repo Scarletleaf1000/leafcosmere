@@ -27,7 +27,7 @@ public class ItemRegistryObject<ITEM extends Item> extends WrappedRegistryObject
 	public static <T extends Item> Collection<T> asItemList(Collection<ItemRegistryObject<T>> registryCollection)
 	{
 		Collection<T> out = new ArrayList<T>(registryCollection.size());
-		for(ItemRegistryObject<T> object : registryCollection)
+		for (ItemRegistryObject<T> object : registryCollection)
 		{
 			out.add(object.asItem());
 		}

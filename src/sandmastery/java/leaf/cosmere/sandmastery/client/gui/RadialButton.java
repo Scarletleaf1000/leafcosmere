@@ -33,17 +33,20 @@ public class RadialButton extends Button
 	private final float startAngle;
 	private final float endAngle;
 	private final Manifestation manifestation;
+
 	protected RadialButton(int pX, int pY, int radius, int segmentNr, Manifestation manifestation, Consumer<Manifestation> maniConsumer)
 	{
-		super(pX, pY, 16, 16, CommonComponents.EMPTY, (button) -> { }, DEFAULT_NARRATION);
+		super(pX, pY, 16, 16, CommonComponents.EMPTY, (button) ->
+		{
+		}, DEFAULT_NARRATION);
 		this.manifestation = manifestation;
 		this.radius = radius;
 		this.segmentNr = segmentNr;
 		centerX = pX;
 		centerY = pY;
 
-		float fifthCircle = (float) Math.toRadians(360d/5d);
-		startAngle = (float) (fifthCircle*segmentNr);
+		float fifthCircle = (float) Math.toRadians(360d / 5d);
+		startAngle = (float) (fifthCircle * segmentNr);
 		endAngle = startAngle + fifthCircle;
 
 		StringBuilder stringBuilder = new StringBuilder();
@@ -74,7 +77,8 @@ public class RadialButton extends Button
 
 		double angle = Math.atan2(distanceY, distanceX);
 
-		if (angle < 0) {
+		if (angle < 0)
+		{
 			angle += 2 * Math.PI;
 		}
 
@@ -113,12 +117,14 @@ public class RadialButton extends Button
 		renderRadial(pGuiGraphics, isHovered);
 		renderIcon(pGuiGraphics);
 		if (isHovered)
+		{
 			renderInfoBlock(pGuiGraphics);
+		}
 	}
 
 	private void renderRadial(GuiGraphics pGuiGraphics, boolean isHovered)
 	{
-		float r = GuiUtils.BACKGROUND_COLOR.getRed()/255.f, g = GuiUtils.BACKGROUND_COLOR.getGreen()/255.f, b = GuiUtils.BACKGROUND_COLOR.getBlue()/255.f;
+		float r = GuiUtils.BACKGROUND_COLOR.getRed() / 255.f, g = GuiUtils.BACKGROUND_COLOR.getGreen() / 255.f, b = GuiUtils.BACKGROUND_COLOR.getBlue() / 255.f;
 		float a = 1f;
 
 		if (isHovered)
@@ -164,14 +170,14 @@ public class RadialButton extends Button
 
 		double midAngle = (startAngle + endAngle) / 2;
 		double midRadius = (radius) / 1.5;
-		int iconSize = width-2;
-		int posX = centerX + (int)(Math.cos(midAngle) * midRadius) - iconSize/2;
-		int posY = centerY + (int)(Math.sin(midAngle) * midRadius) - iconSize/2;
+		int iconSize = width - 2;
+		int posX = centerX + (int) (Math.cos(midAngle) * midRadius) - iconSize / 2;
+		int posY = centerY + (int) (Math.sin(midAngle) * midRadius) - iconSize / 2;
 
 		RenderSystem.setShaderColor(0f, 0f, 0f, alpha);
 		pGuiGraphics.blit(iconLocation,
-				posX+1,
-				posY+1,
+				posX + 1,
+				posY + 1,
 				iconSize,
 				iconSize,
 				0,
@@ -239,10 +245,16 @@ public class RadialButton extends Button
 				if (distSq <= radiusSq)
 				{
 					float angle = (float) Math.atan2(pixelCenterY, pixelCenterX);
-					if (angle < 0) angle += (float) (Math.PI * 2);
+					if (angle < 0)
+					{
+						angle += (float) (Math.PI * 2);
+					}
 
 					float diff = angle - startAngle;
-					if (diff < 0) diff += (float) (Math.PI * 2);
+					if (diff < 0)
+					{
+						diff += (float) (Math.PI * 2);
+					}
 
 					if (diff < radsPerSegment)
 					{

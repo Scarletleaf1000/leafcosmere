@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "sandmastery:block/white_sand_block" }
+    "": {
+      "model": "sandmastery:block/white_sand_block"
+    }
   }
 }

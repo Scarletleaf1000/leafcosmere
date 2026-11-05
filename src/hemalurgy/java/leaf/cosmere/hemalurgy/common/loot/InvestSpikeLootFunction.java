@@ -59,10 +59,10 @@ public class InvestSpikeLootFunction extends LootItemConditionalFunction
 				hemalurgyStealWhitelist == null
 				? Optional.empty()
 				: hemalurgyStealWhitelist
-						.stream()
-						.filter(Metals.MetalType::hasAssociatedManifestation)
-						.skip(lootContext.getRandom().nextInt(hemalurgyStealWhitelist.size()))
-						.findFirst();
+				  .stream()
+				  .filter(Metals.MetalType::hasAssociatedManifestation)
+				  .skip(lootContext.getRandom().nextInt(hemalurgyStealWhitelist.size()))
+				  .findFirst();
 
 		//todo metal types that aren't able to store powers.
 		if (stealType.isEmpty())

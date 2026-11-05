@@ -36,7 +36,8 @@ public class SpiritwebHud extends AbstractWidget
 	@Override
 	protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick)
 	{
-		SpiritwebCapability.get(player).ifPresent( (spiritweb -> {
+		SpiritwebCapability.get(player).ifPresent((spiritweb ->
+		{
 			if (!CosmereConfigs.CLIENT_CONFIG.disableSelectedManifestationHud.get()
 					&& spiritweb.getSelectedManifestation().getManifestationType() != Manifestations.ManifestationTypes.NONE)
 			{
@@ -85,9 +86,13 @@ public class SpiritwebHud extends AbstractWidget
 			{
 				float intensity = 0;
 				if (mode < 0)
-					intensity = Math.min(Math.abs(mode) * (1f/16f), 1.0f);
+				{
+					intensity = Math.min(Math.abs(mode) * (1f / 16f), 1.0f);
+				}
 				if (mode > 0)
-					intensity = Math.min(Math.abs(mode) * (1f/5f), 1.0f);
+				{
+					intensity = Math.min(Math.abs(mode) * (1f / 5f), 1.0f);
+				}
 
 				if (mode > 0)
 				{
@@ -95,7 +100,8 @@ public class SpiritwebHud extends AbstractWidget
 					g = lerp(g, 0.0f, intensity);
 					b = lerp(b, 0.0f, intensity);
 				}
-				else if (mode < 0) {
+				else if (mode < 0)
+				{
 					r = lerp(r, 0.0f, intensity);
 					g = lerp(g, 0.0f, intensity);
 					b = lerp(b, 1.0f, intensity);
@@ -169,8 +175,8 @@ public class SpiritwebHud extends AbstractWidget
 				pGuiGraphics.blit(resourceLocation,
 						getX(),
 						getY() + 2,
-						getHeight()-4,
-						getHeight()-4,
+						getHeight() - 4,
+						getHeight() - 4,
 						0,
 						0,
 						18,
@@ -199,12 +205,13 @@ public class SpiritwebHud extends AbstractWidget
 	protected int toHex(Color color)
 	{
 		return (color.getAlpha() << 24) |
-				(color.getRed()   << 16) |
-				(color.getGreen() << 8)  |
+				(color.getRed() << 16) |
+				(color.getGreen() << 8) |
 				color.getBlue();
 	}
 
-	public float lerp(float start, float end, float pct) {
+	public float lerp(float start, float end, float pct)
+	{
 		return start + pct * (end - start);
 	}
 }

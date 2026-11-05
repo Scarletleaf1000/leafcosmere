@@ -58,7 +58,7 @@ public abstract class ChargeableItemBase extends BaseItem implements IChargeable
 
 			Minecraft mc = Minecraft.getInstance();
 			Player player = mc.player;
-			if(player != null && !player.getUUID().equals(attunedPlayer) && !attunedPlayer.equals(Constants.NBT.UNKEYED_UUID))
+			if (player != null && !player.getUUID().equals(attunedPlayer) && !attunedPlayer.equals(Constants.NBT.UNKEYED_UUID))
 			{
 				identityName = Component.literal(EnchantmentNames.getInstance().getRandomName(mc.font, 16).getString());
 			}

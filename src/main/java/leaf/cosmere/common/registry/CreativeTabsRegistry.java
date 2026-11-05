@@ -34,9 +34,9 @@ public class CreativeTabsRegistry
 									.displayItems((displayParameters, output) ->
 									{
 										List<IItemProvider> items = ItemsRegistry.ITEMS.getAllItems();
-										for(IItemProvider item : items)
+										for (IItemProvider item : items)
 										{
-											if(!(item.asItem() instanceof GodMetalAlloyNuggetItem))
+											if (!(item.asItem() instanceof GodMetalAlloyNuggetItem))
 											{
 												output.accept(item);
 											}

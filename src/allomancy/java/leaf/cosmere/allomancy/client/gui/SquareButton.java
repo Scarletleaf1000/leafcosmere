@@ -41,7 +41,9 @@ public class SquareButton extends Button
 
 	protected SquareButton(int pX, int pY, int pSize, Metals.MetalType metal, ISpiritweb spiritweb, Consumer<Manifestation> maniConsumer)
 	{
-		super(pX, pY, pSize, pSize, CommonComponents.EMPTY, (button -> { }), DEFAULT_NARRATION);
+		super(pX, pY, pSize, pSize, CommonComponents.EMPTY, (button ->
+		{
+		}), DEFAULT_NARRATION);
 
 		metalType = metal;
 		manifestation = Manifestations.ManifestationTypes.ALLOMANCY.getManifestation(metalType.getID());
@@ -72,9 +74,13 @@ public class SquareButton extends Button
 		if (isMouseOver && hasManifestation)
 		{
 			if (pButton == 0)
+			{
 				Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(manifestation, 1));
+			}
 			else
+			{
 				Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(manifestation, -1));
+			}
 
 			playDownSound(Minecraft.getInstance().getSoundManager());
 		}
@@ -90,12 +96,14 @@ public class SquareButton extends Button
 		renderIcon(pGuiGraphics);
 		renderBorder(pGuiGraphics);
 		if (isHovered)
+		{
 			manifestationConsumer.accept(manifestation);
+		}
 	}
 
 	private void renderBackground(GuiGraphics pGuiGraphics, boolean isHovered)
 	{
-		float r = GuiUtils.BACKGROUND_COLOR.getRed()/255.f, g = GuiUtils.BACKGROUND_COLOR.getGreen()/255.f, b = GuiUtils.BACKGROUND_COLOR.getBlue()/255.f;
+		float r = GuiUtils.BACKGROUND_COLOR.getRed() / 255.f, g = GuiUtils.BACKGROUND_COLOR.getGreen() / 255.f, b = GuiUtils.BACKGROUND_COLOR.getBlue() / 255.f;
 		float a = 1f;
 
 		if (!hasManifestation)
@@ -112,16 +120,20 @@ public class SquareButton extends Button
 			b *= 1.1f;
 		}
 
-		if (manifestation instanceof AllomancyManifestation allomancyManifestation) {
+		if (manifestation instanceof AllomancyManifestation allomancyManifestation)
+		{
 			int mode = allomancyManifestation.getMode(spiritweb);
 			float intensity = Math.min(Math.abs(mode) * 0.2f, 1.0f); // Cap intensity
 
-			if (mode > 0) {
+			if (mode > 0)
+			{
 				// Blend toward pure red
 				r = lerp(r, 1.0f, intensity);
 				g = lerp(g, 0.0f, intensity);
 				b = lerp(b, 0.0f, intensity);
-			} else if (mode < 0) {
+			}
+			else if (mode < 0)
+			{
 				// Blend toward pure blue
 				r = lerp(r, 0.0f, intensity);
 				g = lerp(g, 0.0f, intensity);
@@ -141,9 +153,9 @@ public class SquareButton extends Button
 		buf.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
 		buf.vertex(pose, getX(), getY(), 0).color(r, g, b, a).endVertex();
-		buf.vertex(pose, getX()+getWidth(), getY(), 0).color(r, g, b, a).endVertex();
-		buf.vertex(pose, getX()+getWidth(), getY()+getHeight(), 0).color(r, g, b, a).endVertex();
-		buf.vertex(pose, getX(), getY()+getHeight(), 0).color(r, g, b, a).endVertex();
+		buf.vertex(pose, getX() + getWidth(), getY(), 0).color(r, g, b, a).endVertex();
+		buf.vertex(pose, getX() + getWidth(), getY() + getHeight(), 0).color(r, g, b, a).endVertex();
+		buf.vertex(pose, getX(), getY() + getHeight(), 0).color(r, g, b, a).endVertex();
 
 		tess.end();
 		RenderSystem.disableBlend();
@@ -200,7 +212,7 @@ public class SquareButton extends Button
 	private void renderIcon(GuiGraphics pGuiGraphics)
 	{
 		Color metalColor = metalType.getColor();
-		float r = metalColor.getRed()/255.f, g = metalColor.getGreen()/255.f, b = metalColor.getBlue()/255.f;
+		float r = metalColor.getRed() / 255.f, g = metalColor.getGreen() / 255.f, b = metalColor.getBlue() / 255.f;
 
 		if (!hasManifestation)
 		{
@@ -214,14 +226,14 @@ public class SquareButton extends Button
 		RenderSystem.enableBlend();
 		RenderSystem.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 
-		int iconSize = width-10;
+		int iconSize = width - 10;
 		int posX = getX() + 5;
 		int posY = getY() + 5;
 
 		RenderSystem.setShaderColor(0f, 0f, 0f, alpha);
 		pGuiGraphics.blit(iconLocation,
-				posX+1,
-				posY+1,
+				posX + 1,
+				posY + 1,
 				iconSize,
 				iconSize,
 				0,
@@ -247,7 +259,8 @@ public class SquareButton extends Button
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
-	public float lerp(float start, float end, float pct) {
+	public float lerp(float start, float end, float pct)
+	{
 		return start + pct * (end - start);
 	}
 }

@@ -50,14 +50,12 @@ public class ClientPowerSaveState
 		}
 
 
-
 		public int getNum()
 		{
 			return num;
 		}
 
 	}
-
 
 
 }

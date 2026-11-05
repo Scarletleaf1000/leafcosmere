@@ -70,7 +70,7 @@ public class SurgebindingItemModelsGen extends ItemModelProvider
 				// hand-written model in resources/assets/surgebinding/models/item/nightblood.json
 				continue;
 			}
-			else if(item instanceof ShardplateCurioItem)
+			else if (item instanceof ShardplateCurioItem)
 			{
 				complexItem(path, "shardplate_helmet", "shardplate_helmet_visor");
 				continue;
@@ -95,11 +95,12 @@ public class SurgebindingItemModelsGen extends ItemModelProvider
 				.parent(new ModelFile.UncheckedModelFile("item/generated"))
 				.texture("layer0", modLoc("item/" + texturePath));
 	}
+
 	public ItemModelBuilder complexItem(String path, String texturePath1, String texturePath2)
 	{
 		return this.getBuilder(path)
 				.parent(new ModelFile.UncheckedModelFile("item/generated"))
 				.texture("layer0", modLoc("item/" + texturePath1))
-				.texture("layer1",modLoc("item/" + texturePath2));
+				.texture("layer1", modLoc("item/" + texturePath2));
 	}
 }

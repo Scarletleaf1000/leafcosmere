@@ -3,7 +3,8 @@
 // Paste this class into your mod and generate all required imports
 
 
-public class shardblade<T extends Trident> extends EntityModel<T> {
+public class shardblade<T extends Trident> extends EntityModel<T>
+{
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "shardblade"), "main");
 	private final ModelPart root;
@@ -21,7 +22,8 @@ public class shardblade<T extends Trident> extends EntityModel<T> {
 	private final ModelPart crossguard_guide;
 	private final ModelPart crossguard_1;
 
-	public shardblade(ModelPart root) {
+	public shardblade(ModelPart root)
+	{
 		this.root = root.getChild("root");
 		this.blade = this.root.getChild("blade");
 		this.blade_guide = this.blade.getChild("blade_guide");
@@ -38,7 +40,8 @@ public class shardblade<T extends Trident> extends EntityModel<T> {
 		this.crossguard_1 = this.cross_guard.getChild("crossguard_1");
 	}
 
-	public static LayerDefinition createBodyLayer() {
+	public static LayerDefinition createBodyLayer()
+	{
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
@@ -74,12 +77,14 @@ public class shardblade<T extends Trident> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Trident entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(Trident entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
+	{
 
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha)
+	{
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

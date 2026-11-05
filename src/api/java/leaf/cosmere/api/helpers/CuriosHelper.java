@@ -15,9 +15,10 @@ public class CuriosHelper
 		return CuriosApi.getCuriosInventory(entity).resolve();
 	}
 
-	public static Optional<SlotResult> getSlot(LivingEntity entity, String slotID, int index) {
+	public static Optional<SlotResult> getSlot(LivingEntity entity, String slotID, int index)
+	{
 		ICuriosItemHandler sub = getCuriosHandler(entity).orElse(null);
-		if(sub == null)
+		if (sub == null)
 		{
 			return Optional.empty();
 		}
@@ -27,7 +28,7 @@ public class CuriosHelper
 	public static ItemStack getStackInSlot(LivingEntity entity, String slotID, int index)
 	{
 		var slot = getSlot(entity, slotID, index).orElse(null);
-		if(slot == null)
+		if (slot == null)
 		{
 			return ItemStack.EMPTY;
 		}
@@ -37,7 +38,7 @@ public class CuriosHelper
 	public static Optional<SlotContext> getContextInSlot(LivingEntity entity, String slotID, int index)
 	{
 		var slot = getSlot(entity, slotID, index).orElse(null);
-		if(slot == null)
+		if (slot == null)
 		{
 			return Optional.empty();
 		}
@@ -49,14 +50,15 @@ public class CuriosHelper
 		ICuriosItemHandler sub = getCuriosHandler(entity).orElse(null);
 		if (sub == null)
 		{
-			return new ArrayList<SlotResult> ();
+			return new ArrayList<SlotResult>();
 		}
 		return sub.findCurios(item);
 	}
+
 	public static List<SlotResult> getSlotsWithItem(LivingEntity entity, Item... items)
 	{
 		List<SlotResult> results = new ArrayList<>();
-		for (Item item: items)
+		for (Item item : items)
 		{
 			var slotsWithItem = getSlotsWithItem(entity, item);
 			if (slotsWithItem != null && !slotsWithItem.isEmpty())
@@ -66,10 +68,11 @@ public class CuriosHelper
 		}
 		return results;
 	}
+
 	public static List<SlotResult> getSlotsWithItem(LivingEntity entity, Collection<? extends Item> items)
 	{
 		List<SlotResult> results = new ArrayList<>();
-		for (Item item: items)
+		for (Item item : items)
 		{
 			var slotsWithItem = getSlotsWithItem(entity, item);
 			if (slotsWithItem != null && !slotsWithItem.isEmpty())
@@ -85,7 +88,7 @@ public class CuriosHelper
 		ICuriosItemHandler sub = getCuriosHandler(entity).orElse(null);
 		if (sub == null)
 		{
-			return new ArrayList<SlotResult> ();
+			return new ArrayList<SlotResult>();
 		}
 		return sub.findCurios(slotIDs);
 	}
@@ -93,7 +96,7 @@ public class CuriosHelper
 	public static boolean hasItemInInventory(LivingEntity entity, Item item)
 	{
 		var handler = getCuriosHandler(entity).orElse(null);
-		if(handler == null)
+		if (handler == null)
 		{
 			return false;
 		}
@@ -103,7 +106,7 @@ public class CuriosHelper
 	public static boolean hasItemInSlot(LivingEntity entity, String slotID, int index, Item item)
 	{
 		var slot = getSlot(entity, slotID, index).orElse(null);
-		if(slot == null)
+		if (slot == null)
 		{
 			return false;
 		}
@@ -111,23 +114,23 @@ public class CuriosHelper
 	}
 
 
-
 	public static boolean hasItemInSlot(LivingEntity entity, String slotID, int index, Item... items)
 	{
-		for (Item item: items)
+		for (Item item : items)
 		{
-			if(hasItemInSlot(entity, slotID, index, item))
+			if (hasItemInSlot(entity, slotID, index, item))
 			{
 				return true;
 			}
 		}
 		return false;
 	}
+
 	public static boolean hasItemInSlot(LivingEntity entity, String slotID, int index, Collection<? extends Item> items)
 	{
-		for (Item item: items)
+		for (Item item : items)
 		{
-			if(hasItemInSlot(entity, slotID, index, item))
+			if (hasItemInSlot(entity, slotID, index, item))
 			{
 				return true;
 			}

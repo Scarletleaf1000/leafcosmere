@@ -89,9 +89,8 @@ public class OuterRadialButton extends Button
 	}
 
 	@Override
-	protected void renderWidget(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick)
-	{
-		boolean isHover =isMouseOver(pMouseX, pMouseY);
+	protected void renderWidget(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+		boolean isHover = isMouseOver(pMouseX, pMouseY);
 		renderSegment(pGuiGraphics, isHover);
 		renderIcon(pGuiGraphics);
 	}
@@ -105,8 +104,7 @@ public class OuterRadialButton extends Button
 		double dSqr = distanceX * distanceX + distanceY * distanceY;
 
 		if (dSqr < innerRadius * innerRadius ||
-			dSqr > outerRadius * outerRadius)
-		{
+				dSqr > outerRadius * outerRadius) {
 			return false;
 		}
 
@@ -122,7 +120,8 @@ public class OuterRadialButton extends Button
 
 		if (start <= end) {
 			retVal = angle >= start && angle <= end;
-		} else {
+		}
+		else {
 			retVal = angle >= start || angle <= end;
 		}
 
@@ -144,9 +143,13 @@ public class OuterRadialButton extends Button
 		if (isMouseOver && hasManifestation)
 		{
 			if (pButton == 0)
+			{
 				Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(manifestation, 1));
+			}
 			else
+			{
 				Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(manifestation, -1));
+			}
 
 			playDownSound(Minecraft.getInstance().getSoundManager());
 		}
@@ -180,7 +183,8 @@ public class OuterRadialButton extends Button
 			color = color.brighter();
 		}
 
-		if (manifestation instanceof AllomancyManifestation allomancyManifestation) {
+		if (manifestation instanceof AllomancyManifestation allomancyManifestation)
+		{
 			int mode = allomancyManifestation.getMode(spiritweb);
 			float intensity = Math.min(Math.abs(mode) * 0.2f, 1.0f);
 
@@ -224,7 +228,7 @@ public class OuterRadialButton extends Button
 	private void renderIcon(@NotNull GuiGraphics pGuiGraphics)
 	{
 		Color metalColor = metalType.getColor();
-		float r = metalColor.getRed()/255.f, g = metalColor.getGreen()/255.f, b = metalColor.getBlue()/255.f;
+		float r = metalColor.getRed() / 255.f, g = metalColor.getGreen() / 255.f, b = metalColor.getBlue() / 255.f;
 
 		if (!hasManifestation)
 		{
@@ -242,13 +246,13 @@ public class OuterRadialButton extends Button
 		double midAngle = (startAngle + endAngle) / 2;
 		double midRadius = (innerRadius + outerRadius) / 2.0;
 		int iconSize = width - 2;
-		int posX = centerX + (int)(Math.cos(midAngle) * midRadius) - iconSize/2;
-		int posY = centerY + (int)(Math.sin(midAngle) * midRadius) - iconSize/2;
+		int posX = centerX + (int) (Math.cos(midAngle) * midRadius) - iconSize / 2;
+		int posY = centerY + (int) (Math.sin(midAngle) * midRadius) - iconSize / 2;
 
 		RenderSystem.setShaderColor(0f, 0f, 0f, alpha);
 		pGuiGraphics.blit(iconLocation,
-				posX+1,
-				posY+1,
+				posX + 1,
+				posY + 1,
 				iconSize,
 				iconSize,
 				0,
@@ -300,10 +304,16 @@ public class OuterRadialButton extends Button
 				if (distSq <= outerRadiusSq && distSq >= innerRadiusSq)
 				{
 					float angle = (float) Math.atan2(pixelCenterY, pixelCenterX);
-					if (angle < 0) angle += (float) (Math.PI * 2);
+					if (angle < 0)
+					{
+						angle += (float) (Math.PI * 2);
+					}
 
 					float diff = angle - startAngle;
-					if (diff < 0) diff += (float) (Math.PI * 2);
+					if (diff < 0)
+					{
+						diff += (float) (Math.PI * 2);
+					}
 
 					if (diff < radsPerSegment)
 					{

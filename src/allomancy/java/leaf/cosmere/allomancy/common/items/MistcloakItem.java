@@ -22,11 +22,11 @@ public class MistcloakItem extends Item implements ICurioItem
 {
 	public MistcloakItem(Properties properties)
 	{
-		super( properties);
+		super(properties);
 	}
 
 	//todo increase dodge chance while in the mists
-	
+
 
 	@Override
 	public boolean isDamageable(ItemStack stack)

@@ -80,7 +80,10 @@ public class HonorbladeItem extends ShardbladeItem
 	public ItemStack getDefaultInstance()
 	{
 		ItemStack stack = super.getDefaultInstance();
-		IRadiantShardData data = stack.getCapability(RadiantShardData.RADIANT_SHARD_DATA).orElseGet(() -> {return new BondableRadiantShardData(stack);});
+		IRadiantShardData data = stack.getCapability(RadiantShardData.RADIANT_SHARD_DATA).orElseGet(() ->
+		{
+			return new BondableRadiantShardData(stack);
+		});
 		data.setOrder(radiantOrder);
 		return stack;
 	}
@@ -115,7 +118,7 @@ public class HonorbladeItem extends ShardbladeItem
 			pTooltipComponents.add(TextHelper.createText(attunedPlayerName));
 		}
 
-		if(data.getOrder() != null)
+		if (data.getOrder() != null)
 		{
 			pTooltipComponents.add(TextHelper.createText(StringHelper.fixCapitalisation(data.getOrder().getName())));
 		}

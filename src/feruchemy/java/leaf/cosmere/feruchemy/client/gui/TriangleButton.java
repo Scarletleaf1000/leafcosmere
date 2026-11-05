@@ -44,7 +44,9 @@ public class TriangleButton extends Button
 
 	public TriangleButton(int pX, int pY, int distance, float rotation, Metals.MetalType metal, ISpiritweb spiritweb, Consumer<Manifestation> maniConsumer)
 	{
-		super(pX, pY, distance, distance, CommonComponents.EMPTY, (button) -> { }, DEFAULT_NARRATION);
+		super(pX, pY, distance, distance, CommonComponents.EMPTY, (button) ->
+		{
+		}, DEFAULT_NARRATION);
 		this.rotation = rotation;
 		this.spiritweb = spiritweb;
 		this.metal = metal;
@@ -123,9 +125,13 @@ public class TriangleButton extends Button
 			else
 			{
 				if (pButton == 0)
+				{
 					Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(manifestation, 1));
+				}
 				else
+				{
 					Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(manifestation, -1));
+				}
 			}
 
 			playDownSound(Minecraft.getInstance().getSoundManager());
@@ -152,9 +158,13 @@ public class TriangleButton extends Button
 			int mode = feruchemyManifestation.getMode(spiritweb);
 			float intensity = 0;
 			if (mode < 0)
-				intensity = Math.min(Math.abs(mode) * (1f/16f), 1.0f);
+			{
+				intensity = Math.min(Math.abs(mode) * (1f / 16f), 1.0f);
+			}
 			if (mode > 0)
-				intensity = Math.min(Math.abs(mode) * (1f/5f), 1.0f);
+			{
+				intensity = Math.min(Math.abs(mode) * (1f / 5f), 1.0f);
+			}
 
 			if (mode > 0)
 			{
@@ -197,7 +207,7 @@ public class TriangleButton extends Button
 	private void renderIcon(GuiGraphics pGuiGraphics)
 	{
 		Color metalColor = metal.getColor();
-		float r = metalColor.getRed()/255.f, g = metalColor.getGreen()/255.f, b = metalColor.getBlue()/255.f;
+		float r = metalColor.getRed() / 255.f, g = metalColor.getGreen() / 255.f, b = metalColor.getBlue() / 255.f;
 
 		if (!hasManifestation)
 		{

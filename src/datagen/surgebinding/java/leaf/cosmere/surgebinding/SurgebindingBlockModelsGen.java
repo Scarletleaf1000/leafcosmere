@@ -29,8 +29,8 @@ public class SurgebindingBlockModelsGen extends BlockStateProvider
 	@Override
 	protected void registerStatesAndModels()
 	{
-		List<Block> irregularBlocks = List.of(SurgebindingBlocks.LAVIS_POLYP_BLOCK.getBlock(),SurgebindingBlocks.PRICKLETAC_BLOCK.getBlock(),SurgebindingBlocks.ROCKBUD_VARIANT_BLOCK.getBlock(),
-				SurgebindingBlocks.VINEBUD_BLOCK.getBlock(),SurgebindingBlocks.SMALL_SAPPHIRE_BUD.getBlock(),SurgebindingBlocks.MEDIUM_SAPPHIRE_BUD.getBlock(),SurgebindingBlocks.LARGE_SAPPHIRE_BUD.getBlock(),
+		List<Block> irregularBlocks = List.of(SurgebindingBlocks.LAVIS_POLYP_BLOCK.getBlock(), SurgebindingBlocks.PRICKLETAC_BLOCK.getBlock(), SurgebindingBlocks.ROCKBUD_VARIANT_BLOCK.getBlock(),
+				SurgebindingBlocks.VINEBUD_BLOCK.getBlock(), SurgebindingBlocks.SMALL_SAPPHIRE_BUD.getBlock(), SurgebindingBlocks.MEDIUM_SAPPHIRE_BUD.getBlock(), SurgebindingBlocks.LARGE_SAPPHIRE_BUD.getBlock(),
 				SurgebindingBlocks.SAPPHIRE_CLUSTER.getBlock());
 		for (IBlockProvider itemRegistryObject : SurgebindingBlocks.BLOCKS.getAllBlocks())
 		{

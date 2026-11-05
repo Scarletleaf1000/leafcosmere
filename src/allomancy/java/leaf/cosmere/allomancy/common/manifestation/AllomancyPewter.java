@@ -89,8 +89,8 @@ public class AllomancyPewter extends AllomancyManifestation
 
 				if (damage >= livingEntity.getHealth() && pewter.isFlaring(data))
 				{
-						//prevent death by flaring
-						damageReductionMultiplier = 0.1f;
+					//prevent death by flaring
+					damageReductionMultiplier = 0.1f;
 				}
 
 

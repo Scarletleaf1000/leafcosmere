@@ -6,7 +6,9 @@ import net.minecraftforge.common.util.INBTSerializable;
 public interface IShardplateDynamicData extends INBTSerializable<CompoundTag>
 {
 	String getHeadID();
+
 	String getFaceplateID();
+
 	String getBodyID();
 
 	String getKamaID();

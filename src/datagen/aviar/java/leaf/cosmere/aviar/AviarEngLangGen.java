@@ -83,7 +83,7 @@ public class AviarEngLangGen extends LanguageProvider
 	{
 		//Attribute
 		final String descriptionId = HOSTILE_LIFE_SENSE.getAttribute().getDescriptionId();
-		final String name = HOSTILE_LIFE_SENSE.getName().replace('_',' ');
+		final String name = HOSTILE_LIFE_SENSE.getName().replace('_', ' ');
 		// Attributes are the powers themselves, they need their own names.
 		add(descriptionId, StringHelper.fixCapitalisation(name));
 	}

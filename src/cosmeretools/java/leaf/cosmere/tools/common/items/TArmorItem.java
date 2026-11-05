@@ -86,7 +86,7 @@ public class TArmorItem extends ArmorItem implements IHasMetalType, DyeableLeath
 		return type != null && type.contains("overlay")
 		       ? CosmereTools.MODID + ":" + "textures/models/armor/armor_overlay.png"//blank texture
 		       : (CosmereTools.MODID + ":" + "textures/models/armor/armor_layer_%s.png")//following minecraft style,
-				       .formatted(
-						       slot == EquipmentSlot.LEGS ? 2 : 1);//where leggings are separate from the other pieces
+		         .formatted(
+				         slot == EquipmentSlot.LEGS ? 2 : 1);//where leggings are separate from the other pieces
 	}
 }

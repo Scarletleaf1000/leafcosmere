@@ -17,6 +17,7 @@ public class AllomancySpiritwebMenu extends CosmereScreen
 {
 	private static final ResourceLocation BORDER_LOCATION = new ResourceLocation(Allomancy.MODID, "textures/gui/allo_border.png");
 	LocalPlayer player;
+
 	public AllomancySpiritwebMenu()
 	{
 		super(Component.literal("Allomancy"), SpiritwebMenu::selectManiCallback);
@@ -28,9 +29,10 @@ public class AllomancySpiritwebMenu extends CosmereScreen
 	{
 		super.init();
 
-		SpiritwebCapability.get(player).ifPresent( (iSpiritweb -> {
-			int circleCenterX = width/2;
-			int circleCenterY = height/2 + height/16;   // heh, 16, nice
+		SpiritwebCapability.get(player).ifPresent((iSpiritweb ->
+		{
+			int circleCenterX = width / 2;
+			int circleCenterY = height / 2 + height / 16;   // heh, 16, nice
 
 			// Steel
 			addRenderableWidget(new OuterRadialButton(circleCenterX, circleCenterY, 4, Metals.MetalType.STEEL, iSpiritweb, manifestationConsumer));
@@ -67,7 +69,7 @@ public class AllomancySpiritwebMenu extends CosmereScreen
 			addRenderableWidget(new InnerRadialButton(circleCenterX, circleCenterY, 3, Metals.MetalType.DURALUMIN, iSpiritweb, manifestationConsumer));
 
 			// Atium
-			addRenderableWidget(new SquareButton(circleCenterX + height/4, circleCenterY + height/3 - height/16, height/8, Metals.MetalType.ATIUM, iSpiritweb, manifestationConsumer));
+			addRenderableWidget(new SquareButton(circleCenterX + height / 4, circleCenterY + height / 3 - height / 16, height / 8, Metals.MetalType.ATIUM, iSpiritweb, manifestationConsumer));
 		}));
 	}
 
@@ -86,7 +88,7 @@ public class AllomancySpiritwebMenu extends CosmereScreen
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		final int diameter = Minecraft.getInstance().getWindow().getGuiScaledHeight() / 3 * 2 + 2;
-		final int x = width/2 - diameter/2, y = height/2 - diameter/2 + height/16;
+		final int x = width / 2 - diameter / 2, y = height / 2 - diameter / 2 + height / 16;
 		final int iconSize = 256;
 
 		pGuiGraphics.blit(BORDER_LOCATION,

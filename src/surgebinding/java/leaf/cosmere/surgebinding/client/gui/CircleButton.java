@@ -36,7 +36,9 @@ public class CircleButton extends Button
 
 	public CircleButton(int pX, int pY, int radius, ISpiritweb spiritweb, Manifestation manifestation, Consumer<Manifestation> maniConsumer)
 	{
-		super(pX, pY, radius, radius, CommonComponents.EMPTY, (button) -> { }, DEFAULT_NARRATION);
+		super(pX, pY, radius, radius, CommonComponents.EMPTY, (button) ->
+		{
+		}, DEFAULT_NARRATION);
 
 		this.spiritweb = spiritweb;
 		this.centerX = pX;
@@ -61,11 +63,13 @@ public class CircleButton extends Button
 	}
 
 	@Override
-	public boolean isMouseOver(double mouseX, double mouseY) {
+	public boolean isMouseOver(double mouseX, double mouseY)
+	{
 		double distanceX = mouseX - centerX;
 		double distanceY = mouseY - centerY;
 
-		if ((distanceX * distanceX + distanceY * distanceY) <= (radius * radius)) {
+		if ((distanceX * distanceX + distanceY * distanceY) <= (radius * radius))
+		{
 			manifestationConsumer.accept(manifestation);
 			return true;
 		}
@@ -86,12 +90,14 @@ public class CircleButton extends Button
 		renderCircle(pGuiGraphics, isHovered);
 		renderIcon(pGuiGraphics);
 		if (isHovered)
+		{
 			renderText(pGuiGraphics);
+		}
 	}
 
 	private void renderCircle(GuiGraphics pGuiGraphics, boolean isHovered)
 	{
-		float r = GuiUtils.BACKGROUND_COLOR.getRed()/255.f, g = GuiUtils.BACKGROUND_COLOR.getGreen()/255.f, b = GuiUtils.BACKGROUND_COLOR.getBlue()/255.f;
+		float r = GuiUtils.BACKGROUND_COLOR.getRed() / 255.f, g = GuiUtils.BACKGROUND_COLOR.getGreen() / 255.f, b = GuiUtils.BACKGROUND_COLOR.getBlue() / 255.f;
 		float a = 1f;
 
 		if (isHovered)
@@ -135,14 +141,14 @@ public class CircleButton extends Button
 		RenderSystem.enableBlend();
 		RenderSystem.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 
-		int iconSize = width-2;
-		int posX = centerX - iconSize/2;
-		int posY = centerY - iconSize/2;
+		int iconSize = width - 2;
+		int posX = centerX - iconSize / 2;
+		int posY = centerY - iconSize / 2;
 
 		RenderSystem.setShaderColor(0f, 0f, 0f, alpha);
 		pGuiGraphics.blit(iconLocation,
-				posX+1,
-				posY+1,
+				posX + 1,
+				posY + 1,
 				iconSize,
 				iconSize,
 				0,
@@ -176,7 +182,7 @@ public class CircleButton extends Button
 		int y = getY();
 		int windowWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 
-		if (getX() < windowWidth/2)
+		if (getX() < windowWidth / 2)
 		{
 			x = getX() - radius - 5 - font.width(text);
 		}
@@ -185,7 +191,7 @@ public class CircleButton extends Button
 			x = getX() + radius + 5;
 		}
 
-		pGuiGraphics.drawString(font, text, x, y-font.lineHeight/2, 0xFFFFFFFF);
+		pGuiGraphics.drawString(font, text, x, y - font.lineHeight / 2, 0xFFFFFFFF);
 	}
 
 	private void calculateVertexes(float centerX, float centerY, int radius)

@@ -18,9 +18,9 @@ public class HemalurgyServerConfig implements ICosmereConfig
 	public final ForgeConfigSpec.IntValue LERASATIUM_MAX_SPIKE_STRENGTH;
 	public final ForgeConfigSpec.IntValue CHROMIUM_MAX_SPIKE_STRENGTH;
 	public final ForgeConfigSpec.IntValue DEFAULT_POWER_MAX_SPIKE_STRENGTH;
-    public final ForgeConfigSpec.IntValue LINCHPIN_SPIKE_SPIRITWEB_BONUS;
-    public final ForgeConfigSpec.IntValue ALLOMANTIC_PEWTER_SPIRITWEB_BONUS;
-    public final ForgeConfigSpec.IntValue FERUCHEMICAL_GOLD_SPIRITWEB_BONUS;
+	public final ForgeConfigSpec.IntValue LINCHPIN_SPIKE_SPIRITWEB_BONUS;
+	public final ForgeConfigSpec.IntValue ALLOMANTIC_PEWTER_SPIRITWEB_BONUS;
+	public final ForgeConfigSpec.IntValue FERUCHEMICAL_GOLD_SPIRITWEB_BONUS;
 	public final ForgeConfigSpec.DoubleValue IRON_SPIKE_STRENGTH_MULTIPLIER;
 	public final ForgeConfigSpec.DoubleValue SPIKE_PIERCE_THRESHOLD;
 	public final ForgeConfigSpec.IntValue SPIKE_COOLDOWN_TICKS;
@@ -36,12 +36,12 @@ public class HemalurgyServerConfig implements ICosmereConfig
 		LERASATIUM_MAX_SPIKE_STRENGTH = builder.comment("What is the maximum strength a lerasatium spike can hold.").defineInRange("lerasatiumMaxSpikeStrength", 5, 1, 20);
 		CHROMIUM_MAX_SPIKE_STRENGTH = builder.comment("What is the maximum strength a chromium spike can hold.").defineInRange("chromiumMaxSpikeStrength", 3, 1, 5);
 		DEFAULT_POWER_MAX_SPIKE_STRENGTH = builder.comment("What is the maximum strength all other power spikes can hold.").defineInRange("powerMaxSpikeStrength", 7, 1, 20);
-        LINCHPIN_SPIKE_SPIRITWEB_BONUS = builder.comment("What bonus does a linchpin spike grant spiritweb integrity.").defineInRange("linchpinSpikeSpiritwebBonus", 3, 0, 100);
-        ALLOMANTIC_PEWTER_SPIRITWEB_BONUS = builder.comment("What bonus does Allomantic pewter grant spiritweb integrity.").defineInRange("allomanticPewterSpiritwebBonus", 3, 0, 100);
-        FERUCHEMICAL_GOLD_SPIRITWEB_BONUS = builder.comment("What bonus does Feruchemical gold grant spiritweb integrity.").defineInRange("feruchemicalGoldSpiritwebBonus", 6, 0, 100);
+		LINCHPIN_SPIKE_SPIRITWEB_BONUS = builder.comment("What bonus does a linchpin spike grant spiritweb integrity.").defineInRange("linchpinSpikeSpiritwebBonus", 3, 0, 100);
+		ALLOMANTIC_PEWTER_SPIRITWEB_BONUS = builder.comment("What bonus does Allomantic pewter grant spiritweb integrity.").defineInRange("allomanticPewterSpiritwebBonus", 3, 0, 100);
+		FERUCHEMICAL_GOLD_SPIRITWEB_BONUS = builder.comment("What bonus does Feruchemical gold grant spiritweb integrity.").defineInRange("feruchemicalGoldSpiritwebBonus", 6, 0, 100);
 		IRON_SPIKE_STRENGTH_MULTIPLIER = builder.comment("What percentage of a killed entity's base attack damage should an iron spike steal?").defineInRange("ironSpikeStrengthMultiplier", 0.7D, 0D, 100D);
 		SPIKE_PIERCE_THRESHOLD = builder.comment("The amount of health a entity has to be under to pierce them with a spike.").defineInRange("spikePierceThreshold", 10.0, 0.01, Double.MAX_VALUE);
-		SPIKE_COOLDOWN_TICKS = builder.comment("The amount of ticks a spike should be on cooldown after piercing.").defineInRange("spikeCooldownTicks", 20, 1, Integer.MAX_VALUE);
+		SPIKE_COOLDOWN_TICKS = builder.comment("The amount of ticks a spike should be on cooldown after piercing.").defineInRange("spikeCooldownTicks", 1200, 0, Integer.MAX_VALUE);
 
 		builder.pop();
 		configSpec = builder.build();

@@ -25,26 +25,26 @@ import static leaf.cosmere.feruchemy.common.registries.FeruchemyManifestations.F
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Feruchemy.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FeruchemyKeybindings
 {
-    public static final Map<Metals.MetalType, KeyMapping> FERUCHEMY_POWER =
-            Arrays.stream(EnumUtils.METAL_TYPES)
-                    .filter(Metals.MetalType::hasAssociatedManifestation)
-                    .collect(Collectors.toMap(
-                            Function.identity(),
-                            metalType ->
-                                    new KeyMapping(KEY_FERUCHEMY + metalType.getName(), GLFW.GLFW_KEY_UNKNOWN,KEYS_ACTIVATE_CATEGORY)
-                    ));
+	public static final Map<Metals.MetalType, KeyMapping> FERUCHEMY_POWER =
+			Arrays.stream(EnumUtils.METAL_TYPES)
+					.filter(Metals.MetalType::hasAssociatedManifestation)
+					.collect(Collectors.toMap(
+							Function.identity(),
+							metalType ->
+									new KeyMapping(KEY_FERUCHEMY + metalType.getName(), GLFW.GLFW_KEY_UNKNOWN, KEYS_ACTIVATE_CATEGORY)
+					));
 
-    @SubscribeEvent
-    public static void register(RegisterKeyMappingsEvent event)
-    {
-	    for (Metals.MetalType metalType : FERUCHEMY_POWER.keySet())
-	    {
-            KeyMapping key = FERUCHEMY_POWER.get(metalType);
-            FeruchemyManifestation manifest = FERUCHEMY_POWERS.get(metalType).getManifestation();
-            event.register(key);
-            Activator entry = new Activator(key, manifest);
-            entry.setCategory("feruchemy");
-            Keybindings.activators.add(entry);
-        }
-    }
+	@SubscribeEvent
+	public static void register(RegisterKeyMappingsEvent event)
+	{
+		for (Metals.MetalType metalType : FERUCHEMY_POWER.keySet())
+		{
+			KeyMapping key = FERUCHEMY_POWER.get(metalType);
+			FeruchemyManifestation manifest = FERUCHEMY_POWERS.get(metalType).getManifestation();
+			event.register(key);
+			Activator entry = new Activator(key, manifest);
+			entry.setCategory("feruchemy");
+			Keybindings.activators.add(entry);
+		}
+	}
 }

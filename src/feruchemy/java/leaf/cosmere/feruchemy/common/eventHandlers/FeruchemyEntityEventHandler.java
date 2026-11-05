@@ -48,9 +48,15 @@ public class FeruchemyEntityEventHandler
 			if (stack.getItem() instanceof MetalNuggetItem metalNuggetItem)
 			{
 				// Don't alloy for consuming normal metal nuggets
-				if (!(stack.getItem() instanceof GodMetalAlloyNuggetItem) && !(stack.getItem() instanceof GodMetalNuggetItem)) return;
+				if (!(stack.getItem() instanceof GodMetalAlloyNuggetItem) && !(stack.getItem() instanceof GodMetalNuggetItem))
+				{
+					return;
+				}
 				// Only consume the nugget if it contains Lerasatium
-				if (metalNuggetItem.getMetalType().isGodMetal() && metalNuggetItem.getMetalType() != Metals.MetalType.LERASATIUM) return;
+				if (metalNuggetItem.getMetalType().isGodMetal() && metalNuggetItem.getMetalType() != Metals.MetalType.LERASATIUM)
+				{
+					return;
+				}
 
 				MiscHelper.consumeNugget(target, stack);
 				stack.shrink(1);
@@ -71,9 +77,15 @@ public class FeruchemyEntityEventHandler
 		if (event.getItem().getItem() instanceof MetalNuggetItem metalNuggetItem)
 		{
 			// Don't alloy for consuming normal metal nuggets
-			if(!(event.getItem().getItem() instanceof GodMetalAlloyNuggetItem) && !(event.getItem().getItem() instanceof GodMetalNuggetItem)) return;
+			if (!(event.getItem().getItem() instanceof GodMetalAlloyNuggetItem) && !(event.getItem().getItem() instanceof GodMetalNuggetItem))
+			{
+				return;
+			}
 			// Only consume the nugget if it contains Lerasatium
-			if(metalNuggetItem.getMetalType().isGodMetal() && metalNuggetItem.getMetalType() != Metals.MetalType.LERASATIUM) return;
+			if (metalNuggetItem.getMetalType().isGodMetal() && metalNuggetItem.getMetalType() != Metals.MetalType.LERASATIUM)
+			{
+				return;
+			}
 
 			//no need to shrink item count as it's already done as part of nugget use item finish
 			MiscHelper.consumeNugget(livingEntity, event.getItem());

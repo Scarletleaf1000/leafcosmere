@@ -41,7 +41,8 @@ public class KolossSmallModel<T extends LivingEntity> extends HumanoidModel<T>
 	}
 
 
-	public static LayerDefinition createBodyLayer() {
+	public static LayerDefinition createBodyLayer()
+	{
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 

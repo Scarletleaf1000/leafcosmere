@@ -12,7 +12,10 @@ public interface IHasSize
 	default Integer readMetalAlloySizeNbtData(ItemStack itemStack)
 	{
 		CompoundTag nbt = itemStack.getOrCreateTag();
-		if(nbt.contains("nuggetSize")) return nbt.getInt("nuggetSize");
+		if (nbt.contains("nuggetSize"))
+		{
+			return nbt.getInt("nuggetSize");
+		}
 		writeMetalAlloySizeNbtData(itemStack, getMaxSize());
 		return getMaxSize();
 	}
@@ -20,7 +23,10 @@ public interface IHasSize
 	default boolean writeMetalAlloySizeNbtData(ItemStack itemStack, int size)
 	{
 		CompoundTag nbt = itemStack.getOrCreateTag();
-		if (size > getMaxSize() || size < getMinSize()) return false;
+		if (size > getMaxSize() || size < getMinSize())
+		{
+			return false;
+		}
 		nbt.putInt("nuggetSize", size);
 		return true;
 	}

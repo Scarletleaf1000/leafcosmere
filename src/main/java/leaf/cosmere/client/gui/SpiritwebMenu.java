@@ -73,15 +73,15 @@ public class SpiritwebMenu extends Screen
 		int count = registry.getManifestationScreenMap().size();
 		int buttonWidth = 32;
 		int offset = 5;
-		int totalBlockWidth = (count-1) * (buttonWidth+offset) + buttonWidth;
-		int startX = (this.width/2) - (totalBlockWidth/2);
+		int totalBlockWidth = (count - 1) * (buttonWidth + offset) + buttonWidth;
+		int startX = (this.width / 2) - (totalBlockWidth / 2);
 		for (int i = 0; i < Manifestations.ManifestationTypes.AVIAR.getID(); i++)
 		{
-			Manifestations.ManifestationTypes.valueOf(i).ifPresent( (maniType) ->
+			Manifestations.ManifestationTypes.valueOf(i).ifPresent((maniType) ->
 			{
 				if (registry.getManifestationScreenMap().get(maniType) != null)
 				{
-					int x = startX + (added.get() * (buttonWidth+offset));
+					int x = startX + (added.get() * (buttonWidth + offset));
 					addRenderableWidget(new TabButton(x, (pButton ->
 					{
 						if (maniType != selectedManifestationType)
@@ -93,7 +93,7 @@ public class SpiritwebMenu extends Screen
 					}), maniType,
 							() -> selectedManifestationType));
 
-					added.set(added.get()+1);
+					added.set(added.get() + 1);
 
 					if (selectedManifestationType == maniType)
 					{
@@ -108,7 +108,9 @@ public class SpiritwebMenu extends Screen
 			});
 		}
 		if (selectedManifestationScreen != null)
+		{
 			selectedManifestationScreen.init(Minecraft.getInstance(), this.width, this.height);
+		}
 	}
 
 	@Override
@@ -161,7 +163,9 @@ public class SpiritwebMenu extends Screen
 	private void renderInfoBlock(GuiGraphics pGuiGraphics)
 	{
 		if (selectedManifestation != null && selectedManifestation.getInfoBlock() != null)
+		{
 			selectedManifestation.getInfoBlock().render(pGuiGraphics, 0, 0, 0f);
+		}
 	}
 
 	public static void selectManiCallback(Manifestation manifestation)

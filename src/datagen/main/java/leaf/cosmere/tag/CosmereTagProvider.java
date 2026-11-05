@@ -99,7 +99,10 @@ public class CosmereTagProvider extends BaseTagProvider
 				getItemBuilder(Tags.Items.NUGGETS).add(metalNuggetTag);
 
 				ItemRegistryObject<Item> nugRegObj = ItemsRegistry.METAL_NUGGETS.get(metalType);
-				if (nugRegObj == null) nugRegObj = ItemsRegistry.GOD_METAL_NUGGETS.get(metalType);
+				if (nugRegObj == null)
+				{
+					nugRegObj = ItemsRegistry.GOD_METAL_NUGGETS.get(metalType);
+				}
 
 				if (nugRegObj != null)
 				{// tell the Nugget that our Nuggets are related
@@ -113,9 +116,9 @@ public class CosmereTagProvider extends BaseTagProvider
 				}
 
 				// Add the metal alloy nugget to the nugget tags
-				if(!metalType.isGodMetal() && metalType.hasAssociatedManifestation())
+				if (!metalType.isGodMetal() && metalType.hasAssociatedManifestation())
 				{
-					for(Metals.MetalType godMetalType : new Metals.MetalType[] { Metals.MetalType.LERASIUM, Metals.MetalType.LERASATIUM})
+					for (Metals.MetalType godMetalType : new Metals.MetalType[]{Metals.MetalType.LERASIUM, Metals.MetalType.LERASATIUM})
 					{
 						final TagKey<Item> godMetalAlloyNuggetTag = godMetalType.getGodMetalAlloyNuggetTag(metalType);
 						getItemBuilder(Tags.Items.NUGGETS).add(godMetalAlloyNuggetTag);

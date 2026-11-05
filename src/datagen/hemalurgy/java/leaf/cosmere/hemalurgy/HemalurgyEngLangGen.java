@@ -94,9 +94,9 @@ public class HemalurgyEngLangGen extends LanguageProvider
 
 	private void addAttributes()
 	{
-        final String descriptionId = HemalurgyAttributes.SPIRITWEB_INTEGRITY.getAttribute().getDescriptionId();
-        String translation = descriptionId.split("\\.")[1];
-        add(descriptionId, "Spiritweb Integrity");
+		final String descriptionId = HemalurgyAttributes.SPIRITWEB_INTEGRITY.getAttribute().getDescriptionId();
+		String translation = descriptionId.split("\\.")[1];
+		add(descriptionId, "Spiritweb Integrity");
 	}
 
 	private void addPatchouli()

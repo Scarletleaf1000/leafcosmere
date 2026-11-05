@@ -66,5 +66,7 @@ public class AllomancyServerConfig implements ICosmereConfig
 	}
 
 	@Override
-	public void clearCache() {  }
+	public void clearCache()
+	{
+	}
 }

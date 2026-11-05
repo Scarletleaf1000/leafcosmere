@@ -36,7 +36,8 @@ public class MistcloakModel extends HumanoidModel<LivingEntity>
 	private final ModelPart body;
 	private final ModelPart left_arm;
 
-	public MistcloakModel(ModelPart root) {
+	public MistcloakModel(ModelPart root)
+	{
 		super(root.getChild("root"));
 		this.root = root.getChild("root");
 		this.head = this.root.getChild("head");
@@ -45,7 +46,8 @@ public class MistcloakModel extends HumanoidModel<LivingEntity>
 		this.left_arm = this.root.getChild("left_arm");
 	}
 
-	public static LayerDefinition createBodyLayer() {
+	public static LayerDefinition createBodyLayer()
+	{
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 

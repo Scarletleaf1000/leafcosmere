@@ -35,10 +35,19 @@ public class TemporarySandBE extends BlockEntity
 
 	public static void tick(Level level, BlockPos pos, BlockState state, TemporarySandBE entity)
 	{
-		if (level.isClientSide()) return;
+		if (level.isClientSide())
+		{
+			return;
+		}
 		entity.ticksSinceUpdate++;
-		if (entity.ticksSinceUpdate < 5) return;
-		if (ThreadLocalRandom.current().nextBoolean()) return;
+		if (entity.ticksSinceUpdate < 5)
+		{
+			return;
+		}
+		if (ThreadLocalRandom.current().nextBoolean())
+		{
+			return;
+		}
 		int age = state.getValue(AGE);
 		if (age <= 0)
 		{

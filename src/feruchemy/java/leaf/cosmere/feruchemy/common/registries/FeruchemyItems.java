@@ -32,8 +32,9 @@ public class FeruchemyItems
 							Function.identity(),
 							type -> ITEMS.register(
 									type.getName() + RegNameStubs.RING + RegNameStubs.METALMIND,
-									() -> {
-										if(type == Metals.MetalType.NICROSIL)
+									() ->
+									{
+										if (type == Metals.MetalType.NICROSIL)
 										{
 											return new NicrosilRingMetalmindItem(type);
 										}
@@ -51,8 +52,9 @@ public class FeruchemyItems
 							Function.identity(),
 							type -> ITEMS.register(
 									type.getName() + RegNameStubs.BRACELET + RegNameStubs.METALMIND,
-									() -> {
-										if(type == Metals.MetalType.NICROSIL)
+									() ->
+									{
+										if (type == Metals.MetalType.NICROSIL)
 										{
 											return new NicrosilBraceletMetalmindItem(type);
 										}
@@ -61,7 +63,7 @@ public class FeruchemyItems
 											return new BraceletMetalmindItem(type);
 										}
 									})
-							));
+					));
 
 	public static final Map<Metals.MetalType, ItemRegistryObject<Item>> METAL_NECKLACES =
 			Arrays.stream(EnumUtils.METAL_TYPES)
@@ -70,8 +72,9 @@ public class FeruchemyItems
 							Function.identity(),
 							type -> ITEMS.register(
 									type.getName() + RegNameStubs.NECKLACE + RegNameStubs.METALMIND,
-									() -> {
-										if(type == Metals.MetalType.NICROSIL)
+									() ->
+									{
+										if (type == Metals.MetalType.NICROSIL)
 										{
 											return new NicrosilNecklaceMetalmindItem(type);
 										}
@@ -80,6 +83,6 @@ public class FeruchemyItems
 											return new NecklaceMetalmindItem(type);
 										}
 									})
-							));
+					));
 
 }

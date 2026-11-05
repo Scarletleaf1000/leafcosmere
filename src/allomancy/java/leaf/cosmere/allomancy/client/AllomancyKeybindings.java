@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import org.lwjgl.glfw.GLFW;
 import leaf.cosmere.api.EnumUtils;
+
 import java.util.function.Function;
 
 import java.util.Arrays;
@@ -34,14 +35,14 @@ public class AllomancyKeybindings
 	public static KeyMapping ALLOMANCY_SOOTHE;
 	public static KeyMapping ALLOMANCY_RIOT;
 
-	
-	public static final Map<Metals.MetalType,KeyMapping> ALLOMANCY_POWER =
+
+	public static final Map<Metals.MetalType, KeyMapping> ALLOMANCY_POWER =
 			Arrays.stream(EnumUtils.METAL_TYPES)
-				.filter(Metals.MetalType::hasAssociatedManifestation)
+					.filter(Metals.MetalType::hasAssociatedManifestation)
 					.collect(Collectors.toMap(
-						Function.identity(),
-						metalType ->
-							new KeyMapping(KEY_ALLOMANCY + metalType.getName(),GLFW.GLFW_KEY_UNKNOWN,KEYS_ACTIVATE_CATEGORY)
+							Function.identity(),
+							metalType ->
+									new KeyMapping(KEY_ALLOMANCY + metalType.getName(), GLFW.GLFW_KEY_UNKNOWN, KEYS_ACTIVATE_CATEGORY)
 					));
 
 	@SubscribeEvent
@@ -52,9 +53,8 @@ public class AllomancyKeybindings
 		event.register(ALLOMANCY_SOOTHE = new KeyMapping(KEY_ALLOMANCY_SOOTHE, GLFW.GLFW_KEY_UNKNOWN, KEYS_CATEGORY));
 		event.register(ALLOMANCY_RIOT = new KeyMapping(KEY_ALLOMANCY_RIOT, GLFW.GLFW_KEY_UNKNOWN, KEYS_CATEGORY));
 
-	
 
-		for (Metals.MetalType metalType: ALLOMANCY_POWER.keySet())
+		for (Metals.MetalType metalType : ALLOMANCY_POWER.keySet())
 		{
 			KeyMapping key = ALLOMANCY_POWER.get(metalType);
 			AllomancyManifestation manifest = ALLOMANCY_POWERS.get(metalType).getManifestation();

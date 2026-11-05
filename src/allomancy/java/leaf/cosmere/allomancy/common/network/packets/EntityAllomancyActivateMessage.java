@@ -38,7 +38,8 @@ public class EntityAllomancyActivateMessage implements ICosmerePacket
 	{
 		ServerPlayer player = context.getSender();
 		MinecraftServer server = player.getServer();
-		server.submitAsync(() -> SpiritwebCapability.get(player).ifPresent((cap) -> {
+		server.submitAsync(() -> SpiritwebCapability.get(player).ifPresent((cap) ->
+		{
 			if (!data.isEmpty())
 			{
 				Metals.MetalType metalType = Metals.MetalType.valueOf(data.getInt("metalID")).get();

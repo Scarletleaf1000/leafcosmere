@@ -15,6 +15,7 @@ import java.util.List;
 public class SurgebindingSpiritwebMenu extends CosmereScreen
 {
 	final LocalPlayer player;
+
 	public SurgebindingSpiritwebMenu()
 	{
 		super(Component.literal("Surgebinding"), SpiritwebMenu::selectManiCallback);
@@ -26,9 +27,10 @@ public class SurgebindingSpiritwebMenu extends CosmereScreen
 	{
 		super.init();
 
-		int radius = height/16;
+		int radius = height / 16;
 
-		SpiritwebCapability.get(player).ifPresent( (spiritweb -> {
+		SpiritwebCapability.get(player).ifPresent((spiritweb ->
+		{
 			final List<Manifestation> availableManifestations = spiritweb.getAvailableManifestations();
 
 			int i = 0;
@@ -36,7 +38,7 @@ public class SurgebindingSpiritwebMenu extends CosmereScreen
 			{
 				if (mani.getManifestationType() == Manifestations.ManifestationTypes.SURGEBINDING)
 				{
-					addRenderableWidget(new CircleButton((int) (width/2f - radius*1.5 + (radius*3) * i), height/2, radius, spiritweb, mani, manifestationConsumer));
+					addRenderableWidget(new CircleButton((int) (width / 2f - radius * 1.5 + (radius * 3) * i), height / 2, radius, spiritweb, mani, manifestationConsumer));
 					i++;
 				}
 			}

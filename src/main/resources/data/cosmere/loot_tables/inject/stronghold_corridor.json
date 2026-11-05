@@ -20,7 +20,6 @@
           ]
         },
         {
-
           "type": "minecraft:item",
           "_comment": "Shardblade is randomized.",
           "name": "surgebinding:shardblade",

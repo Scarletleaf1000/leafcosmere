@@ -46,36 +46,63 @@ public class GodMetalNuggetsCompress extends CustomRecipe
 		int numItems = 0;
 		boolean isAlloy = false;
 		boolean isGod = false;
-		for(int i = 0; i < inv.getContainerSize(); i++)
+		for (int i = 0; i < inv.getContainerSize(); i++)
 		{
 			ItemStack itemStack = inv.getItem(i);
-			if(itemStack.isEmpty()) continue;
-			if(INGREDIENT_GOD_METAL_ALLOY_NUG.test(inv.getItem(i)))
+			if (itemStack.isEmpty())
+			{
+				continue;
+			}
+			if (INGREDIENT_GOD_METAL_ALLOY_NUG.test(inv.getItem(i)))
 			{
 				isAlloy = true;
 				numItems++;
 				GodMetalAlloyNuggetItem item = (GodMetalAlloyNuggetItem) itemStack.getItem();
 
-				if(godMetalType == null) godMetalType = item.getMetalType();
-				if(godMetalType != item.getMetalType()) return false;
+				if (godMetalType == null)
+				{
+					godMetalType = item.getMetalType();
+				}
+				if (godMetalType != item.getMetalType())
+				{
+					return false;
+				}
 
-				if(alloyedMetalType == null) alloyedMetalType = item.getAlloyedMetalType();
-				if(alloyedMetalType != item.getAlloyedMetalType()) return false;
+				if (alloyedMetalType == null)
+				{
+					alloyedMetalType = item.getAlloyedMetalType();
+				}
+				if (alloyedMetalType != item.getAlloyedMetalType())
+				{
+					return false;
+				}
 
 				totalSize += item.readMetalAlloySizeNbtData(itemStack);
-				if(totalSize > item.getMaxSize()) return false;
+				if (totalSize > item.getMaxSize())
+				{
+					return false;
+				}
 			}
-		    else if (INGREDIENT_GOD_METAL_NUG.test(inv.getItem(i)))
+			else if (INGREDIENT_GOD_METAL_NUG.test(inv.getItem(i)))
 			{
 				isGod = true;
 				numItems++;
 				GodMetalNuggetItem item = (GodMetalNuggetItem) itemStack.getItem();
 
-				if(godMetalType == null) godMetalType = item.getMetalType();
-				if(godMetalType != item.getMetalType()) return false;
+				if (godMetalType == null)
+				{
+					godMetalType = item.getMetalType();
+				}
+				if (godMetalType != item.getMetalType())
+				{
+					return false;
+				}
 
 				totalSize += item.readMetalAlloySizeNbtData(itemStack);
-				if(totalSize > item.getMaxSize()) return false;
+				if (totalSize > item.getMaxSize())
+				{
+					return false;
+				}
 			}
 			else
 			{
@@ -83,8 +110,14 @@ public class GodMetalNuggetsCompress extends CustomRecipe
 			}
 		}
 
-		if(numItems < 2) return false;
-		if(isGod && isAlloy) return false;
+		if (numItems < 2)
+		{
+			return false;
+		}
+		if (isGod && isAlloy)
+		{
+			return false;
+		}
 
 		return true;
 	}
@@ -96,12 +129,12 @@ public class GodMetalNuggetsCompress extends CustomRecipe
 		MetalType godMetalType = null;
 		MetalType alloyedMetalType = null;
 
-		for(int i = 0; i < inv.getContainerSize(); i++)
+		for (int i = 0; i < inv.getContainerSize(); i++)
 		{
-			if(!inv.getItem(i).isEmpty())
+			if (!inv.getItem(i).isEmpty())
 			{
 				ItemStack curItemStack = inv.getItem(i);
-				if(INGREDIENT_GOD_METAL_ALLOY_NUG.test(inv.getItem(i)))
+				if (INGREDIENT_GOD_METAL_ALLOY_NUG.test(inv.getItem(i)))
 				{
 					GodMetalAlloyNuggetItem curItem = (GodMetalAlloyNuggetItem) curItemStack.getItem();
 					godMetalType = curItem.getMetalType();
@@ -118,7 +151,7 @@ public class GodMetalNuggetsCompress extends CustomRecipe
 		}
 
 		ItemStack itemStack;
-		if(alloyedMetalType != null)
+		if (alloyedMetalType != null)
 		{
 			itemStack = new ItemStack(ItemsRegistry.GOD_METAL_ALLOY_NUGGETS.get(godMetalType).get(alloyedMetalType));
 		}
@@ -154,7 +187,8 @@ public class GodMetalNuggetsCompress extends CustomRecipe
 		return CosmereRecipesRegistry.GOD_METAL_NUGGETS_COMPRESS.get();
 	}
 
-	public @NotNull NonNullList<ItemStack> getRemainingItems(CraftingContainer pContainer) {
+	public @NotNull NonNullList<ItemStack> getRemainingItems(CraftingContainer pContainer)
+	{
 		return NonNullList.withSize(pContainer.getContainerSize(), ItemStack.EMPTY);
 	}
 

@@ -60,7 +60,7 @@ public class ItemsRegistry
 							)));
 
 	public static final Map<Metals.MetalType, Map<Metals.MetalType, ItemRegistryObject<GodMetalAlloyNuggetItem>>> GOD_METAL_ALLOY_NUGGETS =
-			Arrays.stream(new Metals.MetalType[] { Metals.MetalType.LERASIUM, Metals.MetalType.LERASATIUM })
+			Arrays.stream(new Metals.MetalType[]{Metals.MetalType.LERASIUM, Metals.MetalType.LERASATIUM})
 					.collect(Collectors.toMap(
 							Function.identity(), // key: the god metal itself
 							godMetalType -> Arrays.stream(EnumUtils.METAL_TYPES)

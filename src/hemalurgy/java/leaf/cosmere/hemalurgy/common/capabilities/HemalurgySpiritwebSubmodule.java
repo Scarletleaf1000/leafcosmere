@@ -46,13 +46,13 @@ public class HemalurgySpiritwebSubmodule implements ISpiritwebSubmodule
 						//random messages
 						switch (intensity)
 						{
-							default:	// illegal? perhaps
+							default:    // illegal? perhaps
 							case -3:
-								player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, tickToCheck*2, (intensity*-1)-3, false, false, false)); // confusion = nausea
+								player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, tickToCheck * 2, (intensity * -1) - 3, false, false, false)); // confusion = nausea
 							case -2:
-								player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, tickToCheck*2, (intensity*-1)-2, false, false, false));
+								player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, tickToCheck * 2, (intensity * -1) - 2, false, false, false));
 							case -1:
-								player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, tickToCheck*2, (intensity*-1)-1, false, false, false));
+								player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, tickToCheck * 2, (intensity * -1) - 1, false, false, false));
 								break;
 						}
 					}

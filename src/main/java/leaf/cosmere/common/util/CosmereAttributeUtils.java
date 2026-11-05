@@ -47,21 +47,21 @@ public class CosmereAttributeUtils
 		}
 	}
 
-    public static int getAttributePowerId(Attribute attribute)
-    {
-        switch (getManifestationType(attribute))
-        {
-            case ALLOMANCY:
-            case FERUCHEMY:
-                String metalName = attribute.getDescriptionId().split("\\.")[2];
-                return Metals.MetalType.valueOf(metalName.toUpperCase()).getID();
-            case SURGEBINDING:
-                String surgeName = attribute.getDescriptionId().split("\\.")[2];
-                return Roshar.Surges.valueOf(surgeName.toUpperCase()).getID();
-            default:
-                return 0;
-        }
-    }
+	public static int getAttributePowerId(Attribute attribute)
+	{
+		switch (getManifestationType(attribute))
+		{
+			case ALLOMANCY:
+			case FERUCHEMY:
+				String metalName = attribute.getDescriptionId().split("\\.")[2];
+				return Metals.MetalType.valueOf(metalName.toUpperCase()).getID();
+			case SURGEBINDING:
+				String surgeName = attribute.getDescriptionId().split("\\.")[2];
+				return Roshar.Surges.valueOf(surgeName.toUpperCase()).getID();
+			default:
+				return 0;
+		}
+	}
 
 	public static Attribute getAttributeByDescriptionId(String id)
 	{
@@ -74,7 +74,10 @@ public class CosmereAttributeUtils
 
 	public static ManifestationTypes getManifestationType(Attribute attribute)
 	{
-		if(attribute == null) return ManifestationTypes.NONE;
+		if (attribute == null)
+		{
+			return ManifestationTypes.NONE;
+		}
 		String modId = attribute.getDescriptionId().split("\\.")[1];
 
 		for (ManifestationTypes manifestationType : ManifestationTypes.values())
@@ -123,25 +126,25 @@ public class CosmereAttributeUtils
 		entityAttributeInstance.setBaseValue(0);
 	}
 
-    public static ItemStack getPowerItem(Player player, int itemSlot, boolean isCurio)
-    {
-        if(isCurio)
-        {
-            LazyOptional<ICuriosItemHandler> curiosItemHandler = CuriosApi.getCuriosInventory(player);
-            if (curiosItemHandler.resolve().isPresent())
-            {
-                ICuriosItemHandler itemHandler = curiosItemHandler.resolve().get();
-                return itemHandler.getEquippedCurios().getStackInSlot(itemSlot);
-            }
-            else
-            {
-                return ItemStack.EMPTY;
-            }
-        }
-        else
-        {
-            Inventory playerInventory = player.getInventory();
-            return playerInventory.getItem(itemSlot);
-        }
-    }
+	public static ItemStack getPowerItem(Player player, int itemSlot, boolean isCurio)
+	{
+		if (isCurio)
+		{
+			LazyOptional<ICuriosItemHandler> curiosItemHandler = CuriosApi.getCuriosInventory(player);
+			if (curiosItemHandler.resolve().isPresent())
+			{
+				ICuriosItemHandler itemHandler = curiosItemHandler.resolve().get();
+				return itemHandler.getEquippedCurios().getStackInSlot(itemSlot);
+			}
+			else
+			{
+				return ItemStack.EMPTY;
+			}
+		}
+		else
+		{
+			Inventory playerInventory = player.getInventory();
+			return playerInventory.getItem(itemSlot);
+		}
+	}
 }

@@ -256,5 +256,8 @@ public class ChooseMetalbornPowersCommand extends ModCommand
 		return SINGLE_SUCCESS;
 	}
 
-	private record CommandQueueItem(Manifestation allomanticPower, Manifestation feruchemicalPower, boolean randomPowers) {}
+	private record CommandQueueItem(Manifestation allomanticPower, Manifestation feruchemicalPower,
+	                                boolean randomPowers)
+	{
+	}
 }

@@ -190,9 +190,12 @@ public class SurgebindingSpiritwebSubmodule implements ISpiritwebSubmodule
 	@OnlyIn(Dist.CLIENT)
 	public void registerMenu()
 	{
-		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent((spiritweb -> {
+		SpiritwebCapability.get(Minecraft.getInstance().player).ifPresent((spiritweb ->
+		{
 			if (spiritweb.hasManifestationOfType(Manifestations.ManifestationTypes.SURGEBINDING))
+			{
 				SpiritwebRegistry.getInstance().register(Manifestations.ManifestationTypes.SURGEBINDING, SurgebindingSpiritwebMenu::new);
+			}
 		}));
 	}
 

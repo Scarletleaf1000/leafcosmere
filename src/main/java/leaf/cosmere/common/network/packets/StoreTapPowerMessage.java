@@ -19,16 +19,16 @@ public class StoreTapPowerMessage implements ICosmerePacket
 	Attribute attribute;
 	int attributeStrength;
 	int itemSlot;
-    int attributeSlot;
+	int attributeSlot;
 	boolean isStore;
-    boolean isCurio;
+	boolean isCurio;
 
 	public StoreTapPowerMessage(Attribute attribute, int attributeStrength, int itemSlot, int attributeSlot, boolean isStore, boolean isCurio)
 	{
 		this.attribute = attribute;
 		this.attributeStrength = attributeStrength;
-        this.itemSlot = itemSlot;
-        this.attributeSlot = attributeSlot;
+		this.itemSlot = itemSlot;
+		this.attributeSlot = attributeSlot;
 		this.isStore = isStore;
 		this.isCurio = isCurio;
 	}
@@ -48,31 +48,31 @@ public class StoreTapPowerMessage implements ICosmerePacket
 				// Storing
 				if (isStore)
 				{
-                    ItemStack itemStack = CosmereAttributeUtils.getPowerItem(sender, itemSlot, isCurio);
-                    if (itemStack.getItem() instanceof IHoldsPowers item)
-                    {
-                        if(item.trySetAttunedPlayer(itemStack, sender))
-                        {
-                            CosmereAttributeUtils.removeBaseAttribute(sender, attribute);
-                            item.addPower(itemStack, attribute, attributeStrength, attributeSlot);
-                        }
-                    }
+					ItemStack itemStack = CosmereAttributeUtils.getPowerItem(sender, itemSlot, isCurio);
+					if (itemStack.getItem() instanceof IHoldsPowers item)
+					{
+						if (item.trySetAttunedPlayer(itemStack, sender))
+						{
+							CosmereAttributeUtils.removeBaseAttribute(sender, attribute);
+							item.addPower(itemStack, attribute, attributeStrength, attributeSlot);
+						}
+					}
 				}
 				// Tapping
 				else
 				{
-                    ItemStack itemStack = CosmereAttributeUtils.getPowerItem(sender, itemSlot, isCurio);
-                    if (itemStack.getItem() instanceof IHoldsPowers item)
-                    {
-                        if(item.getPlayerIsAttuned(itemStack, sender))
-                        {
-                            if (attribute instanceof RangedAttribute rangedAttribute)
-                            {
-                                CosmereAttributeUtils.grantBaseAttribute(sender, rangedAttribute, attributeStrength);
-                                item.removePower(itemStack, attribute);
-                            }
-                        }
-                    }
+					ItemStack itemStack = CosmereAttributeUtils.getPowerItem(sender, itemSlot, isCurio);
+					if (itemStack.getItem() instanceof IHoldsPowers item)
+					{
+						if (item.getPlayerIsAttuned(itemStack, sender))
+						{
+							if (attribute instanceof RangedAttribute rangedAttribute)
+							{
+								CosmereAttributeUtils.grantBaseAttribute(sender, rangedAttribute, attributeStrength);
+								item.removePower(itemStack, attribute);
+							}
+						}
+					}
 				}
 				cap.syncToClients(sender);
 			});
@@ -87,9 +87,9 @@ public class StoreTapPowerMessage implements ICosmerePacket
 		buf.writeUtf(this.attribute.getDescriptionId());
 		buf.writeInt(this.attributeStrength);
 		buf.writeInt(this.itemSlot);
-        buf.writeInt(this.attributeSlot);
+		buf.writeInt(this.attributeSlot);
 		buf.writeBoolean(this.isStore);
-        buf.writeBoolean(this.isCurio);
+		buf.writeBoolean(this.isCurio);
 	}
 
 	public static StoreTapPowerMessage decode(FriendlyByteBuf buf)
@@ -97,9 +97,9 @@ public class StoreTapPowerMessage implements ICosmerePacket
 		String attributeId = buf.readUtf();
 		int attributeStrength = buf.readInt();
 		int itemSlot = buf.readInt();
-        int attributeSlot = buf.readInt();
+		int attributeSlot = buf.readInt();
 		boolean isStore = buf.readBoolean();
-        boolean isCurio = buf.readBoolean();
+		boolean isCurio = buf.readBoolean();
 
 		return new StoreTapPowerMessage(CosmereAttributeUtils.getAttributeByDescriptionId(attributeId), attributeStrength, itemSlot, attributeSlot, isStore, isCurio);
 	}

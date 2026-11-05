@@ -76,9 +76,10 @@ public class ClientForgeEvents
 			if (Keybindings.MANIFESTATION_MENU.consumeClick())
 			{
 				SpiritwebRegistry.getInstance().clear();
-				SpiritwebCapability.get(player).ifPresent( (iSpiritweb ->
+				SpiritwebCapability.get(player).ifPresent((iSpiritweb ->
 				{
-					iSpiritweb.getSubmodules().forEach( ((manifestationTypes, iSpiritwebSubmodule) -> {
+					iSpiritweb.getSubmodules().forEach(((manifestationTypes, iSpiritwebSubmodule) ->
+					{
 						iSpiritwebSubmodule.registerMenu();
 					}));
 				}));
@@ -122,7 +123,8 @@ public class ClientForgeEvents
 				{
 					modifier = 1;
 				}
-				Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(selected, modeIncreasePressed ? modifier : -modifier));
+				Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(selected,
+						modeIncreasePressed ? modifier : -modifier));
 			}
 
 			for (Activator activator : Keybindings.activators)
@@ -144,19 +146,19 @@ public class ClientForgeEvents
 					{
 						//if inactive and feruchemic ability tap 5
 						//else level one
-						modifier += activator.getCategory().equals("feruchemy")? -5: 1;
-						Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(selected,modifier));
+						modifier += activator.getCategory().equals("feruchemy") ? -5 : 1;
+						Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(selected, modifier));
 						spiritweb.getLiving().sendSystemMessage(Component.literal("Activated " +
 								Component.translatable(selected.getTranslationKey())));
 
 					}
 					else
 					{
-                        Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(selected,modifier));
+						Cosmere.packetHandler().sendToServer(new ChangeManifestationModeMessage(selected, modifier));
 						spiritweb.getLiving().sendSystemMessage(Component.literal("Deactivated " +
 								Component.translatable(selected.getTranslationKey())));
-                    }
-                }
+					}
+				}
 			}
 
 			//PowerSaveActivator/Saver

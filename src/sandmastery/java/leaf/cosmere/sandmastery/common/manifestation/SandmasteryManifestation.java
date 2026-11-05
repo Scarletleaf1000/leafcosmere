@@ -63,12 +63,18 @@ public class SandmasteryManifestation extends Manifestation
 		requestedModifier *= ((SandmasteryManifestation) manifestation).getRibbonsPerLevel(data);
 		if (requestedModifier > 0)
 		{
-			if (manifestation.getMode(data) >= modeMax(data)) return 0;
+			if (manifestation.getMode(data) >= modeMax(data))
+			{
+				return 0;
+			}
 			return submodule.requstRibbons(data, this, requestedModifier);
 		}
 		else if (requestedModifier < 0)
 		{
-			if (manifestation.getMode(data) <= modeMin(data)) return 0;
+			if (manifestation.getMode(data) <= modeMin(data))
+			{
+				return 0;
+			}
 			return -submodule.returnRibbons(data, this, -requestedModifier); // function expects the number of returned ribbons to be positive, and returns the number of ribbons returned as a positive integer.
 		}
 		return requestedModifier;
@@ -172,7 +178,9 @@ public class SandmasteryManifestation extends Manifestation
 	{
 		int preModifiedCost = MiscHelper.distanceFromGround(data.getLiving()) * getBaseCost();
 		if (preModifiedCost < 0)
+		{
 			preModifiedCost = 1000000000; // If the cost is less than 0, I am over the void. Cost should be high enough cost that you can't reasonably use the power
+		}
 		return preModifiedCost * SandmasteryConfigs.SERVER.CHARGE_COST_MULTIPLIER.get();
 	}
 

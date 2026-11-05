@@ -34,14 +34,24 @@ public class SandJarBE extends BlockEntity
 
 	public static void tick(Level level, BlockPos pos, BlockState state, SandJarBE entity)
 	{
-		if (level.isClientSide()) return;
+		if (level.isClientSide())
+		{
+			return;
+		}
 		entity.ticksSinceUpdate++;
-		if (entity.ticksSinceUpdate < 4) return;
+		if (entity.ticksSinceUpdate < 4)
+		{
+			return;
+		}
 		int investiture = state.getValue(INVESTITURE);
 		if (MiscHelper.checkIfNearbyInvestiture((ServerLevel) level, pos, true))
+		{
 			level.setBlockAndUpdate(pos, state.setValue(INVESTITURE, Math.min(investiture + 1, 100)));
+		}
 		else
+		{
 			level.setBlockAndUpdate(pos, state.setValue(INVESTITURE, Math.max(investiture - 4, 0)));
+		}
 		entity.ticksSinceUpdate = 0;
 	}
 }

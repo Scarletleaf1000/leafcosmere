@@ -40,7 +40,8 @@ public class KolossLargeModel<T extends LivingEntity> extends HumanoidModel<T>
 		return ImmutableList.of(this.root);
 	}
 
-	public static LayerDefinition createBodyLayer() {
+	public static LayerDefinition createBodyLayer()
+	{
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
@@ -144,7 +145,6 @@ public class KolossLargeModel<T extends LivingEntity> extends HumanoidModel<T>
 
 		return LayerDefinition.create(meshdefinition, 256, 256);
 	}
-
 
 
 	@Override
