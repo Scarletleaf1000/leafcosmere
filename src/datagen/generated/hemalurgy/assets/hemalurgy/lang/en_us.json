@@ -92,5 +92,8 @@
   "tooltip.cosmere.attribute.nicrosil": "",
   "tooltip.cosmere.attribute.tin": "%s%s%% Better Night Vision",
   "tooltip.cosmere.attribute.zinc": "%s%s%% Emotional Fortitude",
-  "tooltip.cosmere.power.found": "Hemalurgic Charge:"
+  "tooltip.cosmere.power.found": "Hemalurgic Charge:",
+  "tooltip.hemalurgy.spike.hold": "State: Hold",
+  "tooltip.hemalurgy.spike.pierce": "State: Pierce",
+  "tooltip.hemalurgy.spike.toggle": "Shift + right-click to switch"
 }

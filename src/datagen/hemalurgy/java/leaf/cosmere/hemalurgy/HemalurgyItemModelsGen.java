@@ -46,7 +46,7 @@ public class HemalurgyItemModelsGen extends ItemModelProvider
 			{
 				//pierced spikes use the vertically flipped model
 				ModelFile pierceModel = this.getBuilder(path + "_pierce")
-						.parent(new ModelFile.UncheckedModelFile(modLoc("item/spike")))
+						.parent(new ModelFile.UncheckedModelFile("minecraft:item/handheld"))
 						.texture("layer0", modLoc("item/" + path));
 
 				this.getBuilder(path)

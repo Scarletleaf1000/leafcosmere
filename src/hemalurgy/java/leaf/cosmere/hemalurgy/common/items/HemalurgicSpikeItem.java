@@ -333,6 +333,10 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 	{
 		super.appendHoverText(stack, worldIn, tooltip, flagIn);
 
+		// current state, then how to change it
+		tooltip.add(Component.translatable(hasPierce(stack) ? "tooltip.hemalurgy.spike.pierce" : "tooltip.hemalurgy.spike.hold"));
+		tooltip.add(Component.translatable("tooltip.hemalurgy.spike.toggle"));
+
 		// no extra info if there isn't any
 		if (getHemalurgicIdentity(stack) == null)
 		{
@@ -340,7 +344,6 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 		//stolen identities listed?
 
 		//don't need to do the attributes, since thats covered by curio
-
 	}
 
 	public void killedEntity(ItemStack stack, Player playerEntity, LivingEntity entityKilled)

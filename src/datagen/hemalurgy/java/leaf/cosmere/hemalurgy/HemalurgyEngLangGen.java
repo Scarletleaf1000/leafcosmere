@@ -128,6 +128,10 @@ public class HemalurgyEngLangGen extends LanguageProvider
 		add("tooltip.cosmere.attribute.chromium", "%s%s Luck");
 		add("tooltip.cosmere.attribute.nicrosil", "");//todo hemalurgic investiture
 
+		add("tooltip.hemalurgy.spike.pierce", "State: Pierce");
+		add("tooltip.hemalurgy.spike.hold", "State: Hold");
+		add("tooltip.hemalurgy.spike.toggle", "Shift + right-click to switch");
+
 		add(CONTAINED_POWERS_FOUND, "Hemalurgic Charge:");
 	}
 
