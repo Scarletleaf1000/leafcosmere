@@ -668,13 +668,13 @@ public class SpikeModel extends HumanoidModel<LivingEntity>
 					}
 					case 11, 12 ->
 					{
-						modelPartToRender = leftHandSide ? leftLegLowerMiddle : rightLegLowerMiddle;
-						modelPartToRender.copyFrom(this.root.getChild(leftHandSide ? leftLegID : rightLegID));
+						modelPartToRender = leftHandSide ? leftArmLower : rightArmLower;
+						modelPartToRender.copyFrom(this.root.getChild(leftHandSide ? leftArmID : rightArmID));
 					}
 					case 13, 14 ->
 					{
-						modelPartToRender = leftHandSide ? leftArmLower : rightArmLower;
-						modelPartToRender.copyFrom(this.root.getChild(leftHandSide ? leftArmID : rightArmID));
+						modelPartToRender = leftHandSide ? leftLegLowerMiddle : rightLegLowerMiddle;
+						modelPartToRender.copyFrom(this.root.getChild(leftHandSide ? leftLegID : rightLegID));
 					}
 					case 15, 16 ->
 					{

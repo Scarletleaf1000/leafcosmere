@@ -12,6 +12,7 @@ import leaf.cosmere.common.Cosmere;
 import leaf.cosmere.common.config.CosmereModConfig;
 import leaf.cosmere.hemalurgy.common.capabilities.HemalurgySpiritwebSubmodule;
 import leaf.cosmere.hemalurgy.common.config.HemalurgyConfigs;
+import leaf.cosmere.hemalurgy.common.network.HemalurgyPacketHandler;
 import leaf.cosmere.hemalurgy.common.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,6 +32,7 @@ public class Hemalurgy implements IModModule
 	public static Hemalurgy instance;
 
 	public final Version versionNumber;
+	private final HemalurgyPacketHandler packetHandler;
 
 	public Hemalurgy()
 	{
@@ -51,6 +53,7 @@ public class Hemalurgy implements IModModule
 		HemalurgyCreativeTabs.CREATIVE_TABS.register(modBus);
 
 		versionNumber = new Version(ModLoadingContext.get().getActiveContainer());
+		packetHandler = new HemalurgyPacketHandler();
 	}
 
 	public static ResourceLocation rl(String path)
@@ -61,6 +64,8 @@ public class Hemalurgy implements IModModule
 	private void commonSetup(FMLCommonSetupEvent event)
 	{
 		CosmereAPI.logger.info("Cosmere: Hemalurgy module Version {} initializing...", versionNumber);
+
+		packetHandler.initialize();
 	}
 
 	private void imcQueue(InterModEnqueueEvent event)
@@ -83,6 +88,11 @@ public class Hemalurgy implements IModModule
 	public ISpiritwebSubmodule makeSubmodule()
 	{
 		return new HemalurgySpiritwebSubmodule();
+	}
+
+	public static HemalurgyPacketHandler packetHandler()
+	{
+		return instance.packetHandler;
 	}
 
 	private void onConfigLoad(ModConfigEvent configEvent)

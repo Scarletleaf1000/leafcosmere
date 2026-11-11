@@ -24,6 +24,9 @@ public class HemalurgyServerConfig implements ICosmereConfig
 	public final ForgeConfigSpec.DoubleValue IRON_SPIKE_STRENGTH_MULTIPLIER;
 	public final ForgeConfigSpec.DoubleValue SPIKE_PIERCE_THRESHOLD;
 	public final ForgeConfigSpec.IntValue SPIKE_COOLDOWN_TICKS;
+	public final ForgeConfigSpec.DoubleValue SPIKE_DAMAGE;
+	public final ForgeConfigSpec.IntValue MAX_SPIKES_PER_ENTITY;
+	public final ForgeConfigSpec.DoubleValue SPIKE_PLACE_DAMAGE_PERCENT;
 
 
 	HemalurgyServerConfig()
@@ -42,6 +45,9 @@ public class HemalurgyServerConfig implements ICosmereConfig
 		IRON_SPIKE_STRENGTH_MULTIPLIER = builder.comment("What percentage of a killed entity's base attack damage should an iron spike steal?").defineInRange("ironSpikeStrengthMultiplier", 0.7D, 0D, 100D);
 		SPIKE_PIERCE_THRESHOLD = builder.comment("The amount of health a entity has to be under to pierce them with a spike.").defineInRange("spikePierceThreshold", 10.0, 0.01, Double.MAX_VALUE);
 		SPIKE_COOLDOWN_TICKS = builder.comment("The amount of ticks a spike should be on cooldown after piercing.").defineInRange("spikeCooldownTicks", 1200, 0, Integer.MAX_VALUE);
+		SPIKE_DAMAGE = builder.comment("The amount of damage dealt when placing a spike on an entity.").defineInRange("spikeDamage", 5.0, 0.0, Double.MAX_VALUE);
+		MAX_SPIKES_PER_ENTITY = builder.comment("The maximum number of spikes that can be placed on a single entity.").defineInRange("maxSpikesPerEntity", 10, 1, 100);
+		SPIKE_PLACE_DAMAGE_PERCENT = builder.comment("Percentage of the target's max health dealt when a spike is placed.").defineInRange("spikePlaceDamagePercent", 10.0, 0.0, 100.0);
 
 		builder.pop();
 		configSpec = builder.build();
@@ -73,5 +79,7 @@ public class HemalurgyServerConfig implements ICosmereConfig
 		CHROMIUM_MAX_SPIKE_STRENGTH.clearCache();
 		DEFAULT_POWER_MAX_SPIKE_STRENGTH.clearCache();
 		IRON_SPIKE_STRENGTH_MULTIPLIER.clearCache();
+		SPIKE_DAMAGE.clearCache();
+		MAX_SPIKES_PER_ENTITY.clearCache();
 	}
 }

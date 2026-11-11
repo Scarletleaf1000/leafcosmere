@@ -4,6 +4,7 @@
 
 package leaf.cosmere.hemalurgy.client;
 
+import leaf.cosmere.hemalurgy.client.gui.HemalurgyConfigScreen;
 import leaf.cosmere.hemalurgy.client.render.HemalurgyLayerDefinitions;
 import leaf.cosmere.hemalurgy.client.render.HemalurgyRenderers;
 import leaf.cosmere.hemalurgy.client.render.model.KolossLargeModel;
@@ -16,8 +17,10 @@ import leaf.cosmere.hemalurgy.common.items.HemalurgicSpikeItem;
 import leaf.cosmere.hemalurgy.common.registries.HemalurgyItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -37,6 +40,10 @@ public class HemalurgyClientSetup
 	public static void init(final FMLClientSetupEvent event)
 	{
 		HemalurgyRenderers.register();
+
+		ModLoadingContext.get().registerExtensionPoint(
+				ConfigScreenHandler.ConfigScreenFactory.class,
+				() -> new ConfigScreenHandler.ConfigScreenFactory((mc, parent) -> new HemalurgyConfigScreen(parent)));
 
 		event.enqueueWork(() ->
 		{

@@ -49,6 +49,23 @@ public class HemalurgyEngLangGen extends LanguageProvider
 		addKeybindings();
 		addStats();
 
+		add("screen.hemalurgy.bind_points.title", "Bind Points");
+		add("button.hemalurgy.bind_points", "Bind Points");
+		add("group.hemalurgy.eyes", "Eyes");
+		add("group.hemalurgy.linchpin", "Linchpin");
+		add("group.hemalurgy.physical", "Physical");
+		add("group.hemalurgy.mental", "Mental");
+		add("group.hemalurgy.spiritual", "Spiritual");
+		add("group.hemalurgy.temporal", "Temporal");
+		add("message.hemalurgy.bind_point.occupied", "That bind point already has a spike");
+		add("message.hemalurgy.bind_point.invalid", "That spike doesn't fit this bind point");
+		add("message.hemalurgy.bind_point.no_valid_spikes", "No spikes in your inventory fit this bind point");
+		add("message.hemalurgy.spike.placed", "Spiked %s %s");
+		add("command.hemalurgy.vision.set", "Hemalurgy vision for %s set to %s");
+		add("command.hemalurgy.vision.notify", "Your hemalurgy vision has been turned %s");
+		add("state.hemalurgy.on", "on");
+		add("state.hemalurgy.off", "off");
+
 	}
 
 
@@ -168,6 +185,22 @@ public class HemalurgyEngLangGen extends LanguageProvider
 
 	private void addConfigs()
 	{
+		add("config.hemalurgy.integrityCheckTick", "Spiritweb Integrity Check Tick");
+		add("config.hemalurgy.lerasatiumMaxSpikeStrength", "Lerasatium Max Spike Strength");
+		add("config.hemalurgy.chromiumMaxSpikeStrength", "Chromium Max Spike Strength");
+		add("config.hemalurgy.powerMaxSpikeStrength", "Power Max Spike Strength");
+		add("config.hemalurgy.linchpinSpikeSpiritwebBonus", "Linchpin Spike Spiritweb Bonus");
+		add("config.hemalurgy.allomanticPewterSpiritwebBonus", "Allomantic Pewter Spiritweb Bonus");
+		add("config.hemalurgy.feruchemicalGoldSpiritwebBonus", "Feruchemical Gold Spiritweb Bonus");
+		add("config.hemalurgy.ironSpikeStrengthMultiplier", "Iron Spike Strength Multiplier");
+		add("config.hemalurgy.spikePierceThreshold", "Spike Pierce Threshold");
+		add("config.hemalurgy.spikeCooldownTicks", "Spike Cooldown Ticks");
+		add("config.hemalurgy.spikeDamage", "Spike Damage");
+		add("config.hemalurgy.maxSpikesPerEntity", "Max Spikes Per Entity");
+		add("config.hemalurgy.spikePlaceDamagePercent", "Spike Place Damage Percent");
+		add("screen.hemalurgy.config.title", "Hemalurgy Config");
+		add("message.hemalurgy.config.updated", "Hemalurgy config updated");
+		add("message.hemalurgy.config.denied", "You don't have permission to change the Hemalurgy config");
 	}
 
 	private void addCommands()

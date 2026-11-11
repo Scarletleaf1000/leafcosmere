@@ -37,41 +37,41 @@ public class HemalurgyCuriosProvider extends CuriosDataProvider
 				.dropRule(ICurio.DropRule.ALWAYS_KEEP)
 				.icon(InventoryMenu.EMPTY_ARMOR_SLOT_HELMET)
 				.order(0)
-				.addCosmetic(true);
+				.useNativeGui(false).addCosmetic(true);
 		this.createSlot("linchpin")
 				.size(1)
 				.dropRule(ICurio.DropRule.ALWAYS_KEEP)
 				.icon(EMPTY_SPIKE_SLOT)
 				.order(1)
-				.addCosmetic(true);
+				.useNativeGui(false).addCosmetic(true);
 
 		this.createSlot("physical")
 				.size(8)
 				.dropRule(ICurio.DropRule.ALWAYS_KEEP)
 				.icon(EMPTY_SPIKE_SLOT)
 				.order(501)
-				.addCosmetic(true);
+				.useNativeGui(false).addCosmetic(true);
 
 		this.createSlot("mental")
 				.size(10)
 				.dropRule(ICurio.DropRule.ALWAYS_KEEP)
 				.icon(EMPTY_SPIKE_SLOT)
 				.order(502)
-				.addCosmetic(true);
+				.useNativeGui(false).addCosmetic(true);
 
 		this.createSlot("spiritual")
 				.size(4)
 				.dropRule(ICurio.DropRule.ALWAYS_KEEP)
 				.icon(EMPTY_SPIKE_SLOT)
 				.order(503)
-				.addCosmetic(true);
+				.useNativeGui(false).addCosmetic(true);
 
 		this.createSlot("temporal")
 				.size(16)
 				.dropRule(ICurio.DropRule.ALWAYS_KEEP)
 				.icon(EMPTY_SPIKE_SLOT)
 				.order(504)
-				.addCosmetic(true);
+				.useNativeGui(false).addCosmetic(true);
 
 		this.createEntities("hemalurgists")
 				.addPlayer()
