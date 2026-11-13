@@ -51,6 +51,11 @@ public class AllomancySpiritwebSubmodule implements ISpiritwebSubmodule
 	final String PEWTER_DELAYED_DAMAGE_KEY = "pewter_delayed_damage";
 	private CompoundTag moduleTag = null;
 
+	// Written by Hemalurgy's eye-spike vision each client tick. Allomancy must not depend on
+	// Hemalurgy (that would make the module compile tasks circular), so Hemalurgy pushes this flag.
+	public static boolean eyeSpikeVisionActive = false;
+	private static final int EYE_SPIKE_VISION_RANGE = 16;
+
 	//metals ingested
 	public final Map<Metals.MetalType, Integer> METALS_INGESTED =
 			Arrays.stream(EnumUtils.METAL_TYPES)
@@ -258,11 +263,17 @@ public class AllomancySpiritwebSubmodule implements ISpiritwebSubmodule
 
 		PoseStack viewModelStack = event.getPoseStack();
 
-		//if user has iron or steel manifestation
-		if (spiritweb.hasManifestation(ironAllomancy) || spiritweb.hasManifestation(steelAllomancy))
+		//if user has iron or steel manifestation, or eye-spike vision is active
+		if (spiritweb.hasManifestation(ironAllomancy) || spiritweb.hasManifestation(steelAllomancy) || eyeSpikeVisionActive)
 		{
 			//is zero if the manifestation is not active.
 			int range = Math.max(ironAllomancy.getRange(spiritweb), steelAllomancy.getRange(spiritweb));
+
+			// Eye spikes show iron/steel vision even when not burning (range would otherwise be 0).
+			if (range <= 0 && eyeSpikeVisionActive)
+			{
+				range = EYE_SPIKE_VISION_RANGE;
+			}
 
 			if (range > 0)
 			{

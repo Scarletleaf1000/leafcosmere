@@ -31,6 +31,7 @@
  */
 package leaf.cosmere.hemalurgy.client.render.layer;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -39,9 +40,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import leaf.cosmere.common.Cosmere;
+import leaf.cosmere.hemalurgy.client.render.BindPointClientState;
 import leaf.cosmere.hemalurgy.client.render.VisionClientState;
 import leaf.cosmere.hemalurgy.client.render.layer.BindPointState;
 import leaf.cosmere.hemalurgy.client.render.layer.BindPointTable;
+import leaf.cosmere.hemalurgy.common.BindPointGeometry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -58,66 +61,22 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class BindPointLayer
 extends RenderLayer<LivingEntity, HumanoidModel<LivingEntity>> {
     private static final RenderType TEXTURE = BindPointRenderType.INSTANCE;
     private static final Map<String, float[]> CATEGORY_TINTS = Map.of("mental", new float[]{0.3f, 0.5f, 1.0f}, "physical", new float[]{1.0f, 0.3f, 0.3f}, "spiritual", new float[]{1.0f, 0.85f, 0.2f}, "temporal", new float[]{0.8f, 0.3f, 1.0f});
-    private static final Map<String, CubeDef> CUBE_TABLE = BindPointLayer.buildCubeTable();
     private final Map<String, ModelPart> cubes = new HashMap<String, ModelPart>();
 
     public BindPointLayer(RenderLayerParent<LivingEntity, HumanoidModel<LivingEntity>> renderer) {
         super(renderer);
-        for (String key : CUBE_TABLE.keySet()) {
-            CubeDef def = CUBE_TABLE.get(key);
+        for (String key : BindPointGeometry.keys()) {
+            BindPointGeometry.CubeDef def = BindPointGeometry.cube(key);
             this.cubes.put(key, BindPointLayer.createCube(def.x(), def.y(), def.z()));
         }
-    }
-
-    private static Map<String, CubeDef> buildCubeTable() {
-        HashMap<String, CubeDef> table = new HashMap<String, CubeDef>();
-        table.put("eyes:1", new CubeDef("head", 2.0f, -2.0f, -4.0f));
-        table.put("eyes:2", new CubeDef("head", -2.0f, -2.0f, -4.0f));
-        table.put("linchpin:1", new CubeDef("body", 0.0f, 1.25f, 2.0f));
-        table.put("mental:1", new CubeDef("body", 0.0f, 3.75f, 2.0f));
-        table.put("mental:2", new CubeDef("body", 0.0f, 5.75f, 2.0f));
-        table.put("mental:3", new CubeDef("body", 0.0f, 7.75f, 2.0f));
-        table.put("mental:4", new CubeDef("body", 0.0f, 9.75f, 2.0f));
-        table.put("mental:5", new CubeDef("body", 2.25f, 6.25f, -2.0f));
-        table.put("mental:6", new CubeDef("body", -2.25f, 6.25f, -2.0f));
-        table.put("mental:7", new CubeDef("leftArm", 2.0f, 2.25f, 0.0f));
-        table.put("mental:8", new CubeDef("rightArm", -2.0f, 2.25f, 0.0f));
-        table.put("mental:9", new CubeDef("leftLeg", 0.0f, 4.25f, -2.0f));
-        table.put("mental:10", new CubeDef("rightLeg", 0.0f, 4.25f, -2.0f));
-        table.put("physical:1", new CubeDef("body", 0.0f, 5.75f, -2.0f));
-        table.put("physical:2", new CubeDef("body", 0.0f, 9.75f, -2.0f));
-        table.put("physical:3", new CubeDef("body", 2.25f, 4.25f, -2.0f));
-        table.put("physical:4", new CubeDef("body", -2.25f, 4.25f, -2.0f));
-        table.put("physical:5", new CubeDef("leftArm", 1.0f, -2.0f, 0.0f));
-        table.put("physical:6", new CubeDef("rightArm", -1.0f, -2.0f, 0.0f));
-        table.put("physical:7", new CubeDef("leftLeg", 0.0f, 2.25f, -2.0f));
-        table.put("physical:8", new CubeDef("rightLeg", 0.0f, 2.25f, -2.0f));
-        table.put("spiritual:1", new CubeDef("body", 2.25f, 10.25f, -2.0f));
-        table.put("spiritual:2", new CubeDef("body", -2.25f, 10.25f, -2.0f));
-        table.put("spiritual:3", new CubeDef("leftArm", 2.0f, 0.25f, 0.0f));
-        table.put("spiritual:4", new CubeDef("rightArm", -2.0f, 0.25f, 0.0f));
-        table.put("temporal:1", new CubeDef("body", 2.25f, 8.25f, -2.0f));
-        table.put("temporal:2", new CubeDef("body", -2.25f, 8.25f, -2.0f));
-        table.put("temporal:3", new CubeDef("leftArm", 1.0f, 0.25f, 2.5f));
-        table.put("temporal:4", new CubeDef("rightArm", -1.0f, 0.25f, 2.5f));
-        table.put("temporal:5", new CubeDef("leftArm", 1.0f, 2.25f, 2.5f));
-        table.put("temporal:6", new CubeDef("rightArm", -1.0f, 2.25f, 2.5f));
-        table.put("temporal:7", new CubeDef("leftLeg", 2.5f, 4.25f, -1.0f));
-        table.put("temporal:8", new CubeDef("rightLeg", -2.5f, 4.25f, -1.0f));
-        table.put("temporal:9", new CubeDef("leftArm", 2.5f, 8.25f, 0.0f));
-        table.put("temporal:10", new CubeDef("rightArm", -2.5f, 8.25f, 0.0f));
-        table.put("temporal:11", new CubeDef("leftArm", 2.5f, 6.25f, 0.0f));
-        table.put("temporal:12", new CubeDef("rightArm", -2.5f, 6.25f, 0.0f));
-        table.put("temporal:13", new CubeDef("leftLeg", 0.0f, 6.25f, -2.0f));
-        table.put("temporal:14", new CubeDef("rightLeg", 0.0f, 6.25f, -2.0f));
-        table.put("temporal:15", new CubeDef("leftLeg", 0.0f, 8.25f, -2.0f));
-        table.put("temporal:16", new CubeDef("rightLeg", 0.0f, 8.25f, -2.0f));
-        return table;
     }
 
     private static ModelPart createCube(float cx, float cy, float cz) {
@@ -129,26 +88,34 @@ extends RenderLayer<LivingEntity, HumanoidModel<LivingEntity>> {
 
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, LivingEntity entity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
         boolean menuActive = BindPointState.active;
-        if (!menuActive && !VisionClientState.isActive((LocalPlayer)Minecraft.getInstance().player)) {
-            return;
-        }
+        boolean renderCubes = menuActive || VisionClientState.isActive((LocalPlayer)Minecraft.getInstance().player);
         HumanoidModel model = (HumanoidModel)this.getParentModel();
-        VertexConsumer consumer = buffer.getBuffer(TEXTURE);
+        VertexConsumer consumer = renderCubes ? buffer.getBuffer(TEXTURE) : null;
         Set<String> keys = menuActive ? BindPointState.current : BindPointTable.keys();
         for (String key : keys) {
-            CubeDef def = CUBE_TABLE.get(key);
+            BindPointGeometry.CubeDef def = BindPointGeometry.cube(key);
             ModelPart cube = this.cubes.get(key);
             if (def == null || cube == null) continue;
             ModelPart group = groupFor(model, def);
             if (group == null) continue;
             cube.copyFrom(group);
+            poseStack.pushPose();
+            cube.translateAndRotate(poseStack);
+            Vector4f view = new Vector4f(def.x() / 16.0f, def.y() / 16.0f, def.z() / 16.0f, 1.0f);
+            view.mul(poseStack.last().pose());
+            poseStack.popPose();
+            Vector3f offset = new Vector3f(view.x, view.y, view.z);
+            RenderSystem.getInverseViewRotationMatrix().transform(offset);
+            Vec3 camPos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+            BindPointClientState.put(entity.getId(), key, new Vec3(offset.x, offset.y, offset.z).add(camPos));
+            if (!renderCubes) continue;
             float[] tint = CATEGORY_TINTS.get(key.substring(0, key.indexOf(58)));
             VertexConsumer tinted = tint == null ? consumer : new TintedVertexConsumer(consumer, tint[0], tint[1], tint[2]);
             cube.render(poseStack, tinted, packedLight, OverlayTexture.NO_OVERLAY);
         }
     }
 
-    private static ModelPart groupFor(HumanoidModel<?> model, CubeDef def) {
+    private static ModelPart groupFor(HumanoidModel<?> model, BindPointGeometry.CubeDef def) {
         return switch (def.group()) {
             case "head" -> model.head;
             case "body" -> model.body;
@@ -158,9 +125,6 @@ extends RenderLayer<LivingEntity, HumanoidModel<LivingEntity>> {
             case "rightLeg" -> model.rightLeg;
             default -> null;
         };
-    }
-
-    private record CubeDef(String group, float x, float y, float z) {
     }
 
     private static final class TintedVertexConsumer

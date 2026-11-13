@@ -16,6 +16,7 @@ import leaf.cosmere.common.cap.entity.SpiritwebCapability;
 import leaf.cosmere.common.items.ChargeableMetalCurioItem;
 import leaf.cosmere.hemalurgy.common.Hemalurgy;
 import leaf.cosmere.hemalurgy.common.config.HemalurgyConfigs;
+import leaf.cosmere.hemalurgy.common.config.HemalurgyServerConfig;
 import leaf.cosmere.hemalurgy.common.registries.HemalurgyAttributes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -59,21 +60,9 @@ import static leaf.cosmere.common.registry.CosmereDamageTypesRegistry.SPIKED;
 @Mod.EventBusSubscriber(modid = Hemalurgy.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHemalurgicInfo
 {
-	/**
-	 * Modifiers applied when the item is in the mainhand of a user. copied from sword item
-	 */
-	private final Multimap<Attribute, AttributeModifier> attributeModifiers;
-
 	public HemalurgicSpikeItem(Metals.MetalType metalType)
 	{
 		super(metalType);
-
-		//todo decide on damage
-		float attackDamage = 2f + 1f;//tier.getAttackDamage();
-		ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-		builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", attackDamage, AttributeModifier.Operation.ADDITION));
-		builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.4f, AttributeModifier.Operation.ADDITION));
-		this.attributeModifiers = builder.build();
 	}
 
 	public static boolean hasPierce(ItemStack stack)
@@ -166,6 +155,12 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 						// f-gold gives an extra bonus (+6 default)
 						spiritwebIntegrity += HemalurgyConfigs.SERVER.FERUCHEMICAL_GOLD_SPIRITWEB_BONUS.get();
 					}
+				}
+
+				HemalurgyServerConfig.SpikeTuning tuning = HemalurgyConfigs.SERVER.SPIKE_TUNING.get(metalType);
+				if (tuning != null)
+				{
+					spiritwebIntegrity += tuning.spiritwebBonus().get();
 				}
 
 				attributeModifiers.put(HemalurgyAttributes.SPIRITWEB_INTEGRITY.getAttribute(),
@@ -376,7 +371,11 @@ public class HemalurgicSpikeItem extends ChargeableMetalCurioItem implements IHe
 		{
 			case MAINHAND:
 			case OFFHAND:
-				return this.attributeModifiers;
+				//attack damage is read from config at query time so live edits apply
+				ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+				builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", HemalurgyConfigs.SERVER.SPIKE_ATTACK_DAMAGE.get().floatValue(), AttributeModifier.Operation.ADDITION));
+				builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.4f, AttributeModifier.Operation.ADDITION));
+				return builder.build();
 			case FEET:
 			case LEGS:
 			case CHEST:

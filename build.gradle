@@ -151,6 +151,11 @@ for (def name : secondaryModules) {
     setupExtraSourceSets(sourceSet)
 }
 
+// Hemalurgy depends on Allomancy (e.g. iron/steel vision line scanning for eye spikes).
+// One-directional only: Allomancy must NOT depend on Hemalurgy or the compile tasks become circular.
+sourceSets.hemalurgy.compileClasspath += sourceSets.allomancy.output
+sourceSets.hemalurgy.runtimeClasspath += sourceSets.allomancy.output
+
 //Setup the UPDATE_SOURCESET property in case we are doing any remappings
 project.ext."UPDATE_SOURCESETS" = project.sourceSets.collect { it.name }.join(';')
 

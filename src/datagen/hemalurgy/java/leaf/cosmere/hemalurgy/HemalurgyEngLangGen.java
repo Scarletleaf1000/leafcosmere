@@ -61,6 +61,7 @@ public class HemalurgyEngLangGen extends LanguageProvider
 		add("message.hemalurgy.bind_point.invalid", "That spike doesn't fit this bind point");
 		add("message.hemalurgy.bind_point.no_valid_spikes", "No spikes in your inventory fit this bind point");
 		add("message.hemalurgy.spike.placed", "Spiked %s %s");
+		add("message.hemalurgy.spike.removed", "Removed %s %s");
 		add("command.hemalurgy.vision.set", "Hemalurgy vision for %s set to %s");
 		add("command.hemalurgy.vision.notify", "Your hemalurgy vision has been turned %s");
 		add("state.hemalurgy.on", "on");
@@ -185,20 +186,38 @@ public class HemalurgyEngLangGen extends LanguageProvider
 
 	private void addConfigs()
 	{
-		add("config.hemalurgy.integrityCheckTick", "Spiritweb Integrity Check Tick");
-		add("config.hemalurgy.lerasatiumMaxSpikeStrength", "Lerasatium Max Spike Strength");
-		add("config.hemalurgy.chromiumMaxSpikeStrength", "Chromium Max Spike Strength");
-		add("config.hemalurgy.powerMaxSpikeStrength", "Power Max Spike Strength");
-		add("config.hemalurgy.linchpinSpikeSpiritwebBonus", "Linchpin Spike Spiritweb Bonus");
+		add("config.hemalurgy.integrityCheckTick", "Spiritweb Integrity Check Interval");
+		add("config.hemalurgy.integrityCheckTick.desc", "How often, in ticks, the mod checks whether a player's spiritweb is still intact. Lower values react faster to missing spikes but cost slightly more performance. There are 20 ticks in one second.");
+		add("config.hemalurgy.linchpinSpikeSpiritwebBonus", "Linchpin Spiritweb Bonus");
+		add("config.hemalurgy.linchpinSpikeSpiritwebBonus.desc", "Spiritweb integrity bonus granted while a linchpin spike is equipped. Linchpin spikes occupy a special slot and grant this bonus on top of their metal's own spiritweb bonus.");
 		add("config.hemalurgy.allomanticPewterSpiritwebBonus", "Allomantic Pewter Spiritweb Bonus");
+		add("config.hemalurgy.allomanticPewterSpiritwebBonus.desc", "Extra spiritweb integrity granted when an Allomantic pewter spike is equipped in the linchpin slot. This stacks with the pewter spike's own spiritweb bonus.");
 		add("config.hemalurgy.feruchemicalGoldSpiritwebBonus", "Feruchemical Gold Spiritweb Bonus");
-		add("config.hemalurgy.ironSpikeStrengthMultiplier", "Iron Spike Strength Multiplier");
-		add("config.hemalurgy.spikePierceThreshold", "Spike Pierce Threshold");
-		add("config.hemalurgy.spikeCooldownTicks", "Spike Cooldown Ticks");
-		add("config.hemalurgy.spikeDamage", "Spike Damage");
-		add("config.hemalurgy.maxSpikesPerEntity", "Max Spikes Per Entity");
-		add("config.hemalurgy.spikePlaceDamagePercent", "Spike Place Damage Percent");
+		add("config.hemalurgy.feruchemicalGoldSpiritwebBonus.desc", "Extra spiritweb integrity granted when a Feruchemical gold spike is equipped in the linchpin slot. This stacks with the gold spike's own spiritweb bonus.");
+		add("config.hemalurgy.spikePierceThreshold", "Spike Pierce Health %");
+		add("config.hemalurgy.spikePierceThreshold.desc", "The percentage of maximum health a target must be below for you to pierce them with a spike. Targets below this percentage of their max health can be spiked. Set to 100 to allow spiking full-health targets.");
+		add("config.hemalurgy.spikeCooldownTicks", "Spike Cooldown (Ticks)");
+		add("config.hemalurgy.spikeCooldownTicks.desc", "How long, in ticks, a spike item must wait after piercing a target before it can be used again. There are 20 ticks in one second, so 1200 ticks equals one minute.");
+		add("config.hemalurgy.spikeDamage", "Spike Placement Damage");
+		add("config.hemalurgy.spikeDamage.desc", "Flat damage dealt to the target when a spike is placed on them. This is separate from the percent-based placement damage.");
+		add("config.hemalurgy.maxSpikesPerEntity", "Max Spikes Per Target");
+		add("config.hemalurgy.maxSpikesPerEntity.desc", "The maximum number of spikes that can be embedded in a single target at once. Once reached, no more spikes can be placed until some are removed.");
+		add("config.hemalurgy.spikePlaceDamagePercent", "Spike Placement Damage %");
+		add("config.hemalurgy.spikePlaceDamagePercent.desc", "Damage dealt as a percentage of the target's maximum health when a spike is placed. Higher values make spiking more lethal.");
+		add("config.hemalurgy.spikeRemoveHealthThreshold", "Spike Removal Health %");
+		add("config.hemalurgy.spikeRemoveHealthThreshold.desc", "A target must be at or below this percentage of their maximum health for you to remove a spike by right-clicking. This prevents removing spikes from healthy targets.");
+		add("config.hemalurgy.spikeRemoveDamagePercent", "Spike Removal Damage %");
+		add("config.hemalurgy.spikeRemoveDamagePercent.desc", "Damage dealt as a percentage of the target's maximum health when a spike is removed. Higher values make removal riskier.");
+		add("config.hemalurgy.spikeAttackDamage", "Spike Attack Damage");
+		add("config.hemalurgy.spikeAttackDamage.desc", "The bonus melee attack damage a spike item adds when held in the main or off hand. Defaults to 0 so spikes rely on placement and removal damage percentages. This does not affect the damage dealt when placing or removing spikes.");
 		add("screen.hemalurgy.config.title", "Hemalurgy Config");
+		add("config.hemalurgy.tab.general", "General");
+		add("config.hemalurgy.spike.maxStrength", "Max Spike Strength");
+		add("config.hemalurgy.spike.maxStrength.desc", "The maximum strength this spike can store from a killed target. Strength determines how much power or attribute the spike grants. Set to 0 for no cap.");
+		add("config.hemalurgy.spike.spiritwebBonus", "Spiritweb Integrity Bonus");
+		add("config.hemalurgy.spike.spiritwebBonus.desc", "Spiritweb integrity bonus granted while this spike is equipped. Positive values make your spiritweb harder to damage; negative values weaken it.");
+		add("config.hemalurgy.spike.stealMultiplier", "Steal Strength Multiplier");
+		add("config.hemalurgy.spike.stealMultiplier.desc", "Scales how much power or attribute this spike steals from a killed target. 1.0 steals the normal amount, below 1.0 steals less, and above 1.0 steals more.");
 		add("message.hemalurgy.config.updated", "Hemalurgy config updated");
 		add("message.hemalurgy.config.denied", "You don't have permission to change the Hemalurgy config");
 	}

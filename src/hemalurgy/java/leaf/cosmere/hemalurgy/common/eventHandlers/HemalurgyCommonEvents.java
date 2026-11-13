@@ -4,6 +4,7 @@
 
 package leaf.cosmere.hemalurgy.common.eventHandlers;
 
+import leaf.cosmere.hemalurgy.common.BindPointGazeState;
 import leaf.cosmere.hemalurgy.common.Hemalurgy;
 import leaf.cosmere.hemalurgy.common.HemalurgyVision;
 import leaf.cosmere.hemalurgy.common.SpikeStorage;
@@ -42,6 +43,12 @@ public class HemalurgyCommonEvents
 		{
 			SpikeStorage.syncToNearby(target);
 		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event)
+	{
+		BindPointGazeState.clear(event.getEntity().getUUID());
 	}
 
 }

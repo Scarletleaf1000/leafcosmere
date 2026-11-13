@@ -13,6 +13,7 @@ import leaf.cosmere.api.text.TextHelper;
 import leaf.cosmere.common.cap.entity.SpiritwebCapability;
 import leaf.cosmere.common.registry.AttributesRegistry;
 import leaf.cosmere.hemalurgy.common.config.HemalurgyConfigs;
+import leaf.cosmere.hemalurgy.common.config.HemalurgyServerConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -106,7 +107,7 @@ public interface IHemalurgicInfo
 						Manifestation manifestation = getRandomMetalPowerFromList(manifestationsFound, whiteList, Manifestations.ManifestationTypes.ALLOMANCY);
 						if (manifestation != null)
 						{
-							Invest(stack, manifestation, manifestation.getStrength(entityKilledSpiritWeb, true) * 0.7f, entityKilled.getUUID());
+							Invest(stack, manifestation, manifestation.getStrength(entityKilledSpiritWeb, true) * getSpikeStealMultiplier(spikeMetalType), entityKilled.getUUID());
 							entityKilledSpiritWeb.removeManifestation(manifestation);
 							return;
 						}
@@ -122,7 +123,7 @@ public interface IHemalurgicInfo
 						Manifestation manifestation = getRandomMetalPowerFromList(manifestationsFound, whiteList, Manifestations.ManifestationTypes.FERUCHEMY);
 						if (manifestation != null)
 						{
-							Invest(stack, manifestation, manifestation.getStrength(entityKilledSpiritWeb, true) * 0.7f, entityKilled.getUUID());
+							Invest(stack, manifestation, manifestation.getStrength(entityKilledSpiritWeb, true) * getSpikeStealMultiplier(spikeMetalType), entityKilled.getUUID());
 							entityKilledSpiritWeb.removeManifestation(manifestation);
 							return;
 						}
@@ -156,7 +157,7 @@ public interface IHemalurgicInfo
 						//then try steal it
 						if (manifestation != null)
 						{
-							Invest(stack, manifestation, manifestation.getStrength(entityKilledSpiritWeb, true) * 0.7f, entityKilled.getUUID());
+							Invest(stack, manifestation, manifestation.getStrength(entityKilledSpiritWeb, true) * getSpikeStealMultiplier(spikeMetalType), entityKilled.getUUID());
 							entityKilledSpiritWeb.removeManifestation(manifestation);
 							return;
 						}
@@ -166,7 +167,7 @@ public interface IHemalurgicInfo
 					{
 						for (Manifestation manifestation : manifestationsFound)
 						{
-							Invest(stack, manifestation, manifestation.getStrength(entityKilledSpiritWeb, true) * 0.5f, entityKilled.getUUID());
+							Invest(stack, manifestation, manifestation.getStrength(entityKilledSpiritWeb, true) * getSpikeStealMultiplier(spikeMetalType), entityKilled.getUUID());
 							entityKilledSpiritWeb.removeManifestation(manifestation);
 						}
 					}
@@ -214,10 +215,7 @@ public interface IHemalurgicInfo
 				final double strengthCurrent = getHemalurgicStrength(stack, spikeMetalType);
 				//how much should we add.
 				double entityAbilityStrength = spikeMetalType.getEntityAbilityStrength(entityKilled, playerEntity);
-				if (spikeMetalType == Metals.MetalType.IRON)
-				{
-					entityAbilityStrength *= HemalurgyConfigs.SERVER.IRON_SPIKE_STRENGTH_MULTIPLIER.get();
-				}
+				entityAbilityStrength *= getSpikeStealMultiplier(spikeMetalType);
 				final double strengthToAdd = strengthCurrent + entityAbilityStrength;
 				if (strengthToAdd > 0.01 || strengthToAdd < -0.01)
 				{
@@ -386,32 +384,24 @@ public interface IHemalurgicInfo
 				0);
 
 		HemalurgicSpikeItem spikeItem = (HemalurgicSpikeItem) stack.getItem();
-		switch (spikeItem.getMetalType())
+		HemalurgyServerConfig.SpikeTuning tuning = HemalurgyConfigs.SERVER.SPIKE_TUNING.get(spikeItem.getMetalType());
+		if (tuning != null)
 		{
-			case IRON, TIN, COPPER, ZINC, NICROSIL ->
+			//0 means uncapped
+			final int max = tuning.maxStrength().get();
+			if (max > 0)
 			{
-				//nil
-			}
-			case LERASATIUM ->
-			{
-				//lerasatium spikes can't give more than 5
-				final int max = HemalurgyConfigs.SERVER.LERASATIUM_MAX_SPIKE_STRENGTH.get();
-				strength = Math.min(max, strength);
-			}
-			case CHROMIUM ->
-			{
-				final int max = HemalurgyConfigs.SERVER.CHROMIUM_MAX_SPIKE_STRENGTH.get();
-				strength = Math.min(max, strength);
-			}
-			default ->
-			{
-				//other spikes can't give more than 7
-				final int max = HemalurgyConfigs.SERVER.DEFAULT_POWER_MAX_SPIKE_STRENGTH.get();
 				strength = Math.min(max, strength);
 			}
 		}
 
 		return strength;
+	}
+
+	default double getSpikeStealMultiplier(Metals.MetalType metalType)
+	{
+		HemalurgyServerConfig.SpikeTuning tuning = HemalurgyConfigs.SERVER.SPIKE_TUNING.get(metalType);
+		return tuning == null ? 1.0 : tuning.stealMultiplier().get();
 	}
 
 	default void setHemalurgicStrength(ItemStack stack, String name, double val)

@@ -1,14 +1,14 @@
 {
   "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "hemalurgy:item/lerasatium_spike"
-  },
   "overrides": [
     {
+      "model": "hemalurgy:item/lerasatium_spike_pierce",
       "predicate": {
         "hemalurgy:pierce": 1.0
-      },
-      "model": "hemalurgy:item/lerasatium_spike_pierce"
+      }
     }
-  ]
+  ],
+  "textures": {
+    "layer0": "hemalurgy:item/lerasatium_spike"
+  }
 }

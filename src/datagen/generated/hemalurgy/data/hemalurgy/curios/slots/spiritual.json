@@ -3,5 +3,6 @@
   "drop_rule": "ALWAYS_KEEP",
   "icon": "curios:slot/spike_icon",
   "order": 503,
-  "size": 4
+  "size": 4,
+  "use_native_gui": false
 }
